@@ -60,13 +60,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/button"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:backgroundTint="@color/white_shadow"
             android:gravity="center"
             android:padding="15dp"
-            android:text="@string/signin"
-            android:textAllCaps="false"
-            android:textColor="#084706" />
+            android:textColor="@color/purple"
+            android:text="@string/signin" />
 
         <TextView
             android:id="@+id/signUp_text"
