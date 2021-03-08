@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".MainActivity">
+    tools:context=".SigninActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,9 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <EditText
@@ -41,7 +41,9 @@
             android:background="@drawable/edt_top"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:textColor="@color/purple_light"
+            android:textColorHint="@color/edit_text_color" />
 
         <EditText
             android:id="@+id/login_password"
@@ -51,8 +53,9 @@
             android:background="@drawable/edt_bottom"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:padding="15dp" />
-
+            android:padding="15dp"
+            android:textColor="@color/purple_light"
+            android:textColorHint="@color/edit_text_color" />
 
         <Button
             android:id="@+id/login_btn"
@@ -60,14 +63,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/white_shadow"
+            android:background="@drawable/button"
+            android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:padding="15dp"
-            android:textColor="@color/purple"
-            android:text="@string/signin" />
+            android:text="@string/signin"
+            android:textColor="@color/purple_700" />
 
         <TextView
             android:id="@+id/signUp_text"
+            style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -76,7 +80,6 @@
             android:text="@string/signupNow"
             android:textAllCaps="true"
             android:textColor="#FAD0E1"
-            android:textSize="13dp"
             android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>
