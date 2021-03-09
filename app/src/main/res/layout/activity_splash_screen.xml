@@ -14,14 +14,15 @@
             android:id="@+id/splash_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
             android:layout_marginBottom="60dp"
             android:src="@drawable/logo" />
 
         <ProgressBar
             android:id="@+id/splash_progress"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:indeterminateTint="@color/white_shadow"
             android:layout_alignParentBottom="true"
             android:padding="20dp" />
     </RelativeLayout>

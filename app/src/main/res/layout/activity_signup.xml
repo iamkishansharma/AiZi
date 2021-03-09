@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".SigninActivity">
+    tools:context=".SignupActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/input_group"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/signup_image_upload"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerInParent="true"
+            android:elevation="10dp"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white_shadow"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/image_error_text"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:src="@drawable/logo" />
-    </LinearLayout>
+            android:layout_below="@id/signup_image_upload"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/select_your_photo"
+            android:textColor="@color/white_shadow"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/input_group"
@@ -35,11 +54,23 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/signin_email"
+            android:id="@+id/signup_name"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edt_top"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="@color/purple_light"
+            android:textColorHint="@color/edit_text_color" />
+
+        <EditText
+            android:id="@+id/signup_email"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edt_middle"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="15dp"
@@ -47,7 +78,7 @@
             android:textColorHint="@color/edit_text_color" />
 
         <EditText
-            android:id="@+id/signin_password"
+            android:id="@+id/signup_password"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +90,7 @@
             android:textColorHint="@color/edit_text_color" />
 
         <Button
-            android:id="@+id/signin_btn"
+            android:id="@+id/signup_btn"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,11 +98,11 @@
             android:background="@drawable/button"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:text="@string/signin"
+            android:text="@string/signup"
             android:textColor="@color/purple_700" />
 
         <TextView
-            android:id="@+id/signup_text"
+            android:id="@+id/signin_text"
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +110,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/signupNow"
+            android:text="@string/signinNow"
             android:textAllCaps="true"
             android:textColor="@color/white_shadow"
             android:textStyle="bold" />

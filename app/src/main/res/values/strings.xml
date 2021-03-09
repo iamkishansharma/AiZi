@@ -2,10 +2,11 @@
     <string name="app_name">AiZi</string>
     <string name="signin">SIGN IN</string>
     <string name="signup">SIGN UP</string>
-    <string name="signupNow">Don\'t Have an Account?  Sign Up</string>
-    <string name="signinNow">Already Have an Account?  Sign in</string>
-    <string name="name">Your Name</string>
+    <string name="signupNow">Don\'t Have an Account?\nSign Up</string>
+    <string name="signinNow">Already Have an Account?\nSign In</string>
+    <string name="name">Full Name</string>
     <string name="mobileNo">Mobile Number</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="select_your_photo">🔝\nSelect your photo</string>
 </resources>
