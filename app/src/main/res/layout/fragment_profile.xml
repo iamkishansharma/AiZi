@@ -12,6 +12,7 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/text_view_profile"
             style="@style/TextAppearance.MaterialComponents.Headline4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,5 +20,18 @@
             android:text="@string/profile"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/logout_profile"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_profile"
+            android:layout_margin="30dp"
+            android:background="@drawable/button"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/logout"
+            android:textColor="@android:color/holo_red_dark" />
     </RelativeLayout>
 </FrameLayout>

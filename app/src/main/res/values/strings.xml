@@ -2,6 +2,7 @@
     <string name="app_name">AiZi</string>
     <string name="signin">SIGN IN</string>
     <string name="signup">SIGN UP</string>
+    <string name="logout">LOG OUT</string>
     <string name="signupNow">Don\'t Have an Account?\nSign Up</string>
     <string name="signinNow">Already Have an Account?\nSign In</string>
     <string name="name">Full Name</string>

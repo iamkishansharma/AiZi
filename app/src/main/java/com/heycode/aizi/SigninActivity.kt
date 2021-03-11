@@ -7,23 +7,35 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SigninActivity : AppCompatActivity() {
+    private lateinit var email: EditText
+    private lateinit var password: EditText
+    private var currentUser: FirebaseUser? = null
+
+    //firebase
+    private var mAuth: FirebaseAuth? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signin_activity)
 
+        mAuth = FirebaseAuth.getInstance()
+        currentUser = mAuth?.currentUser
+
+        email = findViewById(R.id.signin_email)
+        password = findViewById(R.id.signin_password)
+
         findViewById<Button>(R.id.signin_btn).setOnClickListener {
             if (
                 checkErrors(
-                    findViewById(R.id.signin_email),
-                    findViewById(R.id.signin_password)
+                    email,
+                    password
                 )
             ) {
-                Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-
-                //TODO:: Add firebase login here then start the activity
-                startActivity(Intent(this, MainActivity::class.java))
+                signInWith(email.text.toString(), password.text.toString())
             }
         }
 
@@ -48,5 +60,24 @@ class SigninActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    private fun signInWith(email: String, password: String) {
+        if (password.length >= 6) {
+            mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Try Again !",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        } else {
+            Toast.makeText(this, "SignIn Task Failed!", Toast.LENGTH_SHORT).show()
+        }
     }
 }
