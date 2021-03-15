@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.color.purple))
         loadFragment(DashbaordFragment())
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_profile -> {
                     fragment = ProfileFragment()
                     supportActionBar?.title = resources.getString(R.string.profile)
+
                 }
             }
 

@@ -8,6 +8,7 @@
     <string name="name">Full Name</string>
     <string name="mobileNo">Mobile Number</string>
     <string name="email">Email</string>
+    <string name="dob">Date of Birth</string>
     <string name="password">Password</string>
     <string name="select_your_photo">🔝\nSelect your photo</string>
     <string name="dashboard">Dashboard</string>

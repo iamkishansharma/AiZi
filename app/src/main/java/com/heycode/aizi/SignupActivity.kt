@@ -1,10 +1,13 @@
 package com.heycode.aizi
 
+import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
+import com.heycode.aizi.models.UserDataModel
 import java.io.ByteArrayOutputStream
 
 
@@ -26,6 +30,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var imageView: ShapeableImageView
     private lateinit var full_name: EditText
     private lateinit var email_: EditText
+    private lateinit var dob: EditText
     private lateinit var password_: EditText
     private var imageUri: Uri? = null
     private var imageSelected: Boolean = false
@@ -49,6 +54,7 @@ class SignupActivity : AppCompatActivity() {
         full_name = findViewById(R.id.signup_name)
         email_ = findViewById(R.id.signup_email)
         password_ = findViewById(R.id.signup_password)
+        dob = findViewById(R.id.signup_dob)
 
         imageView = findViewById(R.id.signup_image_upload)
         imageView.setOnClickListener {
@@ -56,11 +62,33 @@ class SignupActivity : AppCompatActivity() {
             startActivityForResult(gallery, 101)
         }
 
+        //picking date of birth
+        dob.setOnClickListener {
+            val dialogInterface: DialogInterface = object : DialogInterface {
+                override fun cancel() {
+                    //TODO::
+                }
+
+                override fun dismiss() {
+                    //TODO::
+                }
+            }
+
+            val datePickerDialog = DatePickerDialog(this)
+            datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
+                val date = "$year/$month/$dayOfMonth"
+                dob.setText(date)
+            }
+            datePickerDialog.onClick(dialogInterface, 2)
+            datePickerDialog.show()
+        }
+
         findViewById<Button>(R.id.signup_btn).setOnClickListener {
             if (
                 checkErrors(
                     imageSelected,
                     full_name,
+                    dob,
                     email_,
                     password_
                 )
@@ -82,6 +110,7 @@ class SignupActivity : AppCompatActivity() {
     private fun checkErrors(
         imageSelected: Boolean,
         fullName: EditText,
+        dob: EditText,
         email: EditText,
         password: EditText
     ): Boolean {
@@ -92,6 +121,10 @@ class SignupActivity : AppCompatActivity() {
         }
         if (fullName.text.isNullOrEmpty()) {
             fullName.error = "Required!"
+            return false
+        }
+        if (dob.text.isNullOrEmpty()) {
+            dob.error = "Required!"
             return false
         }
         if (email.text.isNullOrEmpty()) {
@@ -115,18 +148,16 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
+
     private fun signUpWith(email: String, password: String) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
                 val user: FirebaseUser? = mAuth.currentUser
                 if (user != null) {
-                    //saving user's data
-                    saveData(full_name.text.toString(), email_.text.toString(), "2021/12/13")
                     //uploading the profile image
                     uploadImage(imageView)
-                    Toast.makeText(this, "Welcome to AiZi", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+
                 }
             } else {
                 // If sign in fails, display a message to the user.
@@ -154,25 +185,42 @@ class SignupActivity : AppCompatActivity() {
         val metadata = StorageMetadata.Builder()
             .setCustomMetadata("text", "Profile pic of ${full_name.text}").build()
 
-        val uploadTask = reference.putBytes(bytes, metadata) //image & text
-        uploadTask.addOnSuccessListener { taskSnapshot ->
-            val url = taskSnapshot.metadata!!
-                .reference!!.downloadUrl
-            Toast.makeText(this, "Url: $url", Toast.LENGTH_LONG).show()
+        reference.putBytes(bytes, metadata).addOnSuccessListener { taskSnapshot ->
+            //getting image url for showing user's profile pic with Glide
+            reference.downloadUrl.addOnSuccessListener { uri ->
+                val imageUrl = uri.toString()
+
+                Log.d(
+                    "KishanAdd",
+                    imageUrl
+                )
+                //saving user's data
+                //navigating to different screen
+                saveData(
+                    full_name.text.toString(),
+                    dob.text.toString(),
+                    email_.text.toString(),
+                    imageUrl
+                )
+            }
         }
     }
 
-    fun saveData(fullName: String, email: String, dob: String) {
-        val hashMap: HashMap<String, Any> = HashMap()
-        hashMap["name"] = fullName
-        hashMap["email"] = email
-        hashMap["dob"] = dob
+    private fun saveData(fullName: String, dob: String, email: String, imageUrl: String) {
 
+        val mUserData = UserDataModel(fullName, dob, email, imageUrl)
         val user: FirebaseUser? = mAuth.currentUser
+
         if (user != null) {
-            mDatabaseReference.child("Users").child(user.uid).updateChildren(hashMap)
+            mDatabaseReference.child("Users").child(user.uid)
+                .setValue(mUserData) //need an object of a
+
+            Toast.makeText(this, "Welcome to AiZi", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+
         } else {
-            Toast.makeText(this, "Can't save the user data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
         }
     }
 }

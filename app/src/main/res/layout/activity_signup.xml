@@ -66,6 +66,19 @@
             android:textColorHint="@color/edit_text_color" />
 
         <EditText
+            android:id="@+id/signup_dob"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edt_middle"
+            android:hint="@string/dob"
+            android:inputType="date"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/purple_light"
+            android:textColorHint="@color/edit_text_color" />
+
+        <EditText
             android:id="@+id/signup_email"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
