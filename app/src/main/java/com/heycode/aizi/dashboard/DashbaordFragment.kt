@@ -35,7 +35,7 @@ class DashbaordFragment : Fragment() {
             startActivity(Intent(activity, TodoActivity::class.java))
         }
         rootView.findViewById<CardView>(R.id.card_training).setOnClickListener {
-            startActivity(Intent(activity, TodoActivity::class.java))
+//            startActivity(Intent(activity, TodoActivity::class.java))
         }
         return rootView
     }
