@@ -56,6 +56,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.3'
     implementation 'com.google.firebase:firebase-storage:19.2.1'
     implementation 'com.google.firebase:firebase-database:19.6.0'
+    implementation 'com.google.firebase:firebase-firestore:22.1.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.1.1'
+
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
 
     //Glide for image loading
     implementation 'com.github.bumptech.glide:glide:4.12.0'

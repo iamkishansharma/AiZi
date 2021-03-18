@@ -2,12 +2,13 @@ package com.heycode.aizi.dashboard.todo
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 import com.heycode.aizi.R
 
 class AddTaskActivity : AppCompatActivity() {
@@ -16,22 +17,24 @@ class AddTaskActivity : AppCompatActivity() {
 
     //firebase
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var mDatabaseReference: DatabaseReference
+    private lateinit var mFirestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_task)
+
+        //ActionBar
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.color.purple))
-        supportActionBar?.title = "Add Tasks"
+        supportActionBar?.title = "Add new Task"
 
         //firebase
         mAuth = FirebaseAuth.getInstance()
-        mDatabaseReference = FirebaseDatabase.getInstance().reference
+        mFirestore = FirebaseFirestore.getInstance()
         title = findViewById(R.id.editText_title)
         description = findViewById(R.id.editText_description)
 
 
-        findViewById<Button>(R.id.buttonAddNote).setOnClickListener {
+        findViewById<Button>(R.id.save_button).setOnClickListener {
             if (title.text.isNullOrEmpty()) {
                 title.error = "Required!"
                 return@setOnClickListener
@@ -40,23 +43,28 @@ class AddTaskActivity : AppCompatActivity() {
                 description.error = "Required!"
                 return@setOnClickListener
             }
-//            saveTaskData(
-//                title.text.toString(),
-//                description.text.toString(),
-//                taskCompleted.isChecked
-//            )
+            saveTaskData(
+                title.text.toString(),
+                description.text.toString(),
+                "no"
+            )
         }
     }
 
-//    private fun saveTaskData(title: String, description: String, isCompleted: Boolean) {
-//        val mTaskData = TaskDataModel(title, description, isCompleted)
-//        val user: FirebaseUser? = mAuth.currentUser
-//        if (user != null) {
-//            mDatabaseReference.child("Users").child(user.uid).child("allTasks").setValue(mTaskData)
-//            Toast.makeText(this, "Welcome to AiZi", Toast.LENGTH_SHORT).show()
-//            finish()
-//        } else {
-//            Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    private fun saveTaskData(title: String, description: String, isCompleted: String) {
+        val user: FirebaseUser? = mAuth.currentUser
+        val reference: DocumentReference = mFirestore.collection("${user?.uid}").document()
+
+        val data = HashMap<String, Any>()
+        data["title"] = title
+        data["description"] = description
+        data["completed"] = isCompleted
+
+        reference.set(data).addOnSuccessListener {
+            Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show()
+            finish()
+        }.addOnFailureListener {
+            Toast.makeText(this, "Error occurred!", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
