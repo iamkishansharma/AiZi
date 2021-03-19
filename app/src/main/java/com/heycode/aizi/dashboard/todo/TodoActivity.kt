@@ -20,6 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.heycode.aizi.R
@@ -28,6 +29,7 @@ class TodoActivity : AppCompatActivity() {
     lateinit var fab: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private var taskAdapter: TaskRecyclerViewAdapter? = null
+    val user = FirebaseAuth.getInstance().currentUser
 
     //firebase
     private lateinit var mAuth: FirebaseAuth
@@ -44,8 +46,6 @@ class TodoActivity : AppCompatActivity() {
         //firebase
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
-        val user = mAuth.currentUser
-
 
         fab = findViewById(R.id.buttonAddNote)
         fab.setOnClickListener {
@@ -93,21 +93,35 @@ class TodoActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//                noteViewModel.delete(adapter.getNoteAt(viewHolder.adapterPosition))
-//                val unDo: ArrayList<Note> = ArrayList<Note>()
-//                unDo.add(adapter.getNoteAt(viewHolder.adapterPosition)) //For BackUp
-//                val snackbar = Snackbar.make(
-//                    findViewById(R.id.coordinateLayout),
-//                    "Deleted: " + adapter.getNoteAt(viewHolder.adapterPosition).getTitle(),
-//                    Snackbar.LENGTH_LONG
-//                )
-//                    .setAction("Undo") {
-//                        //TODO:: WRITE CODE TO UNDO deleted note
-//                        noteViewModel.insert(unDo[0])
-//                        unDo.removeAt(0)
-//                    }
-//                snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent, null))
-//                snackbar.show()
+                val docId: String = taskAdapter!!.snapshots.getSnapshot(viewHolder.position).id
+
+                val reference: DocumentReference =
+                    FirebaseFirestore.getInstance().collection("${user?.uid}").document(docId)
+
+                reference.delete()
+
+                val unDo: ArrayList<Task> = ArrayList()
+                unDo.add(taskAdapter!!.getItem(viewHolder.adapterPosition))
+
+                val snackbar = Snackbar.make(
+                    findViewById(R.id.coordinateLayout),
+                    "Deleted: " + taskAdapter!!.getItem(viewHolder.adapterPosition).title,
+                    Snackbar.LENGTH_LONG
+                )
+                    .setAction("Undo") {
+
+                        val reference: DocumentReference =
+                            FirebaseFirestore.getInstance().collection("${user?.uid}").document()
+
+                        val data = HashMap<String, Any>()
+                        data["title"] = unDo[0].title.toString()
+                        data["description"] = unDo[0].description.toString()
+                        data["completed"] = unDo[0].completed.toString()
+                        reference.set(data)
+                        unDo.clear()
+                    }
+                snackbar.setActionTextColor(resources.getColor(android.R.color.holo_red_dark, null))
+                snackbar.show()
             }
         }).attachToRecyclerView(recyclerView)
 
@@ -135,6 +149,7 @@ class TodoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.delete_all -> {
+                //Taking permission to delete all notes
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Deleting all your notes.")
                     .setCancelable(false)
@@ -149,8 +164,13 @@ class TodoActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else {
-                                //Taking permission to delete all notes
-//                                noteViewModel.deleteAllNotes()
+                                var i = 0
+                                while (i < taskAdapter!!.itemCount) {
+                                    FirebaseFirestore.getInstance().collection("${user?.uid}")
+                                        .document(taskAdapter!!.snapshots.getSnapshot(i).id)
+                                        .delete()
+                                    i++
+                                }
                                 val snackbar: Snackbar = Snackbar.make(
                                     findViewById(R.id.coordinateLayout),
                                     "All your Tasks deleted!",
