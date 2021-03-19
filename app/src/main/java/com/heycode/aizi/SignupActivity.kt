@@ -190,10 +190,6 @@ class SignupActivity : AppCompatActivity() {
             reference.downloadUrl.addOnSuccessListener { uri ->
                 val imageUrl = uri.toString()
 
-                Log.d(
-                    "KishanAdd",
-                    imageUrl
-                )
                 //saving user's data
                 //navigating to different screen
                 saveData(

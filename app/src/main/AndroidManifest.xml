@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AiZi">
-        <activity android:name=".dashboard.todo.AddTaskActivity"></activity>
+        <activity android:name=".dashboard.identify.AddImageActivity"></activity>
+        <activity android:name=".dashboard.todo.AddTaskActivity" />
         <activity android:name=".dashboard.training.TrainingActivity" />
         <activity android:name=".dashboard.todo.TodoActivity" />
         <activity android:name=".dashboard.locations.LocationActivity" />
