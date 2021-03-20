@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,6 +57,7 @@ class IdentifyActivity : AppCompatActivity() {
         class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             var imageNote: TextView = itemView.findViewById(R.id.item_text_view)
             var image: ImageView = itemView.findViewById(R.id.item_image_view)
+            var imageCall: ImageView = itemView.findViewById(R.id.item_call)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -67,6 +69,13 @@ class IdentifyActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             holder.image.setImageDrawable(context.resources.getDrawable(R.drawable.female_doctor))
             holder.imageNote.text = "My Doctor"
+            holder.imageCall.setOnClickListener {
+                Toast.makeText(
+                    context,
+                    "Calling " + holder.imageNote.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         override fun getItemCount(): Int {
