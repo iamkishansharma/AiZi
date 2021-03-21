@@ -20,6 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -29,7 +30,7 @@ class TodoActivity : AppCompatActivity() {
     lateinit var fab: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private var taskAdapter: TaskRecyclerViewAdapter? = null
-    val user = FirebaseAuth.getInstance().currentUser
+    val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     //firebase
     private lateinit var mAuth: FirebaseAuth
@@ -54,7 +55,7 @@ class TodoActivity : AppCompatActivity() {
 
         //RecyclerView setup from firebaseUI
         val query: Query =
-            mFirestore.collection(user.uid).orderBy("title", Query.Direction.DESCENDING)
+            mFirestore.collection(user!!.uid).orderBy("title", Query.Direction.DESCENDING)
 
         val allTasks: FirestoreRecyclerOptions<Task> =
             FirestoreRecyclerOptions.Builder<Task>()
@@ -155,30 +156,31 @@ class TodoActivity : AppCompatActivity() {
                     .setCancelable(false)
                     .setMessage("Are you sure?")
                     .setIcon(R.drawable.logo)
-                    .setPositiveButton("Yes",
-                        DialogInterface.OnClickListener { _, _ ->
-                            if (recyclerView.adapter!!.itemCount == 0) {
-                                Toast.makeText(
-                                    this,
-                                    "Nothing to Delete",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } else {
-                                var i = 0
-                                while (i < taskAdapter!!.itemCount) {
-                                    FirebaseFirestore.getInstance().collection("${user?.uid}")
-                                        .document(taskAdapter!!.snapshots.getSnapshot(i).id)
-                                        .delete()
-                                    i++
-                                }
-                                val snackbar: Snackbar = Snackbar.make(
-                                    findViewById(R.id.coordinateLayout),
-                                    "All your Tasks deleted!",
-                                    Snackbar.LENGTH_LONG
-                                )
-                                snackbar.show()
+                    .setPositiveButton(
+                        "Yes"
+                    ) { _, _ ->
+                        if (recyclerView.adapter!!.itemCount == 0) {
+                            Toast.makeText(
+                                this,
+                                "Nothing to Delete",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            var i = 0
+                            while (i < taskAdapter!!.itemCount) {
+                                FirebaseFirestore.getInstance().collection("${user?.uid}")
+                                    .document(taskAdapter!!.snapshots.getSnapshot(i).id)
+                                    .delete()
+                                i++
                             }
-                        })
+                            val snackbar: Snackbar = Snackbar.make(
+                                findViewById(R.id.coordinateLayout),
+                                "All your Tasks deleted!",
+                                Snackbar.LENGTH_LONG
+                            )
+                            snackbar.show()
+                        }
+                    }
                     .setNegativeButton("No",
                         DialogInterface.OnClickListener { dialogInterface, _ -> dialogInterface.dismiss() })
                 val dialog = builder.create()

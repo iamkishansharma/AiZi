@@ -12,17 +12,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_location" />
-
-    <!--    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
-    <!--        android:id="@+id/location_fab"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="bottom|end"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:text="Add more photos"-->
-    <!--        android:src="@drawable/ic_baseline_add_24"-->
-    <!--        android:visibility="visible"-->
-    <!--        app:backgroundTint="@color/pink"-->
-    <!--        app:elevation="20dp" />-->
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
