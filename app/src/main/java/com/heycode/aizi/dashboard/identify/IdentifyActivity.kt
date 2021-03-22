@@ -2,6 +2,7 @@ package com.heycode.aizi.dashboard.identify
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -70,9 +71,10 @@ class IdentifyActivity : AppCompatActivity() {
             holder.image.setImageDrawable(context.resources.getDrawable(R.drawable.female_doctor))
             holder.imageNote.text = "My Doctor"
             holder.imageCall.setOnClickListener {
+                context.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:9845852024")))
                 Toast.makeText(
                     context,
-                    "Calling " + holder.imageNote.toString(),
+                    "Calling " + holder.imageNote.text.toString(),
                     Toast.LENGTH_SHORT
                 ).show()
             }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:elevation="10dp"
-    app:cardBackgroundColor="@color/pink"
+    app:cardBackgroundColor="@color/purple_card"
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
