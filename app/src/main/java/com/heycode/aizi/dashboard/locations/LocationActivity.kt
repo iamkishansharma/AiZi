@@ -28,7 +28,7 @@ class LocationActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.color.purple))
         supportActionBar?.title = "Important Locations"
 
-        //fire
+        //firebase
         val user = FirebaseAuth.getInstance().currentUser
         mFirestore = FirebaseFirestore.getInstance()
 
@@ -41,11 +41,15 @@ class LocationActivity : AppCompatActivity() {
                 .setQuery(query, LocationModel::class.java)
                 .build()
 
+        checkForAccess(path)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         locationAdapter = LocationsRVAdapter(allLocations, this)
         recyclerView.adapter = locationAdapter
+    }
 
+    private fun checkForAccess(path: String) {
         if (mFirestore.collection(path).id.isNullOrEmpty()) {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Not allowed to use this feature!")
@@ -86,7 +90,6 @@ class LocationActivity : AppCompatActivity() {
             val dialog = builder.create()
             dialog.show()
         }
-
     }
 
     override fun onStart() {

@@ -17,7 +17,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.heycode.aizi.R
 import java.util.*
 
-
 class LocationsRVAdapter(options: FirestoreRecyclerOptions<LocationModel>, var context: Context) :
     FirestoreRecyclerAdapter<LocationModel, LocationsRVAdapter.MyViewHolder>(options) {
 

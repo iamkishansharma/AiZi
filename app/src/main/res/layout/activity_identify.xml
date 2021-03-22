@@ -12,7 +12,7 @@
         android:id="@+id/identify_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_gallery" />
+        tools:listitem="@layout/item_people" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/identify_fab"
@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:text="Add more photos"
         android:src="@drawable/ic_baseline_add_24"
+        android:text="Add more photos"
         android:visibility="visible"
         app:backgroundTint="@color/pink"
         app:elevation="20dp" />
