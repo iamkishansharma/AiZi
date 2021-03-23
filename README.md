@@ -15,9 +15,13 @@
     <tr>
     <th>All Tasks Screen</th>
     <th>Add Task Screen</th>
+    <th>Identify People Screen</th>
+    <th>Important Locations Screen</th>
   </tr>
   <tr>
     <td><img alt="allTasks" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/Task.jpg" width="200px"/></td>
     <td><img alt="addTask" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/AddTask.jpg" width="200px"/></td>
+    <td><img alt="identify" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/Identify.jpg" width="200px"/></td>
+    <td><img alt="locations" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/Locations.jpg" width="200px"/></td>
     </tr>
 </table>
