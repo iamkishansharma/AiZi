@@ -28,8 +28,9 @@ class LocationsRVAdapter(options: FirestoreRecyclerOptions<LocationModel>, var c
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_location, parent, false)
-        return MyViewHolder(v)
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_location, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: LocationModel) {

@@ -3,17 +3,17 @@
     <item
         android:id="@+id/navigation_dashboard"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:icon="@drawable/ic_dashboard"
         android:title="@string/dashboard" />
     <item
         android:id="@+id/navigation_daily_routine"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_medical_services_24"
+        android:icon="@drawable/ic_medical_services"
         android:title="@string/daily_routine" />
     <item
         android:id="@+id/navigation_profile"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_account_box_24"
+        android:icon="@drawable/ic_account_box"
         android:title="@string/profile" />
 
 </menu>

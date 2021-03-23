@@ -1,0 +1,145 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_card1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="10dp"
+    app:cardBackgroundColor="@color/purple_card"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/appoint_card"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardBackgroundColor="@color/pink"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="8dp">
+
+            <ImageView
+                android:id="@+id/appointment_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/female_doctor" />
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@+id/appoint_card">
+
+            <TextView
+                android:id="@+id/appoint_doc_name"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Dr. Kishan Sharma"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/appoint_doc_work_spec"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/appoint_doc_name"
+                android:layout_margin="5dp"
+                android:background="@drawable/button"
+                android:src="@drawable/ic_medical_services" />
+
+            <TextView
+                android:id="@+id/appoint_doc_spec"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appoint_doc_name"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/appoint_doc_work_img"
+                android:singleLine="true"
+                android:text="Neurologist"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/appoint_doc_work_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/appoint_doc_spec"
+                android:layout_margin="5dp"
+                android:background="@drawable/button"
+                android:src="@drawable/ic_local_hospital" />
+
+            <TextView
+                android:id="@+id/appoint_doc_work"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appoint_doc_spec"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/appoint_doc_work_img"
+                android:singleLine="true"
+                android:text="Civil Hospital Pvt Ltd."
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/appoint_doc_location_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/appoint_doc_work"
+                android:layout_margin="5dp"
+                android:background="@drawable/button"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:id="@+id/appoint_doc_location"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appoint_doc_work"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/appoint_doc_location_img"
+                android:singleLine="true"
+                android:text="Meen Bhawan, KT-11, NP"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/appoint_image_time"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/appoint_card"
+            android:layout_margin="5dp"
+            android:background="@drawable/button"
+            android:src="@drawable/ic_alarm" />
+
+        <TextView
+            android:id="@+id/appoint_text_time"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appoint_card"
+            android:layout_toEndOf="@id/appoint_image_time"
+            android:text=" 5:00 PM"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

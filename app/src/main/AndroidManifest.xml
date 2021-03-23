@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AiZi">
+        <activity android:name=".dashboard.appointment.AppointmentActivity"></activity>
         <activity android:name=".dashboard.identify.AddImageActivity" />
         <activity android:name=".dashboard.todo.AddTaskActivity" />
         <activity android:name=".dashboard.training.TrainingActivity" />
