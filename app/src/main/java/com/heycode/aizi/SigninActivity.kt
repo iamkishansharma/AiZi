@@ -2,6 +2,7 @@ package com.heycode.aizi
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -57,6 +58,10 @@ class SigninActivity : AppCompatActivity() {
         }
         if (password.text.isNullOrEmpty()) {
             password.error = "Required!"
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
+            email.error = "Not a valid email"
             return false
         }
         return true

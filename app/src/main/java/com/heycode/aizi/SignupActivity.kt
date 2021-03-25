@@ -7,7 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -127,12 +127,18 @@ class SignupActivity : AppCompatActivity() {
             dob.error = "Required!"
             return false
         }
-        if (email.text.isNullOrEmpty()) {
-            email.error = "Required!"
-            return false
-        }
+
         if (password.text.isNullOrEmpty()) {
             password.error = "Required!"
+            return false
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
+            email.error = "Not a valid email"
+            return false
+        }
+        if (email.text.isNullOrEmpty()) {
+            email.error = "Required!"
             return false
         }
         return true
@@ -147,7 +153,6 @@ class SignupActivity : AppCompatActivity() {
             imageSelected = true
         }
     }
-
 
     private fun signUpWith(email: String, password: String) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
