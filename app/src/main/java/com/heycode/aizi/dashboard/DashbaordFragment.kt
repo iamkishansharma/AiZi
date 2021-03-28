@@ -11,6 +11,7 @@ import com.heycode.aizi.R
 import com.heycode.aizi.dashboard.appointment.AppointmentActivity
 import com.heycode.aizi.dashboard.identify.IdentifyActivity
 import com.heycode.aizi.dashboard.locations.LocationActivity
+import com.heycode.aizi.dashboard.medicine.Medicine
 import com.heycode.aizi.dashboard.todo.TodoActivity
 
 
@@ -39,6 +40,9 @@ class DashbaordFragment : Fragment() {
         }
         rootView.findViewById<CardView>(R.id.card_appointment).setOnClickListener {
             startActivity(Intent(activity, AppointmentActivity::class.java))
+        }
+        rootView.findViewById<CardView>(R.id.card_medicine).setOnClickListener {
+            startActivity(Intent(activity, Medicine::class.java))
         }
         return rootView
     }
