@@ -1,9 +1,6 @@
 package com.heycode.aizi.dashboard.locations
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.heycode.aizi.R
+import com.heycode.aizi.models.LocationModel
 
 class LocationActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -41,55 +39,10 @@ class LocationActivity : AppCompatActivity() {
                 .setQuery(query, LocationModel::class.java)
                 .build()
 
-        checkForAccess(path)
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         locationAdapter = LocationsRVAdapter(allLocations, this)
         recyclerView.adapter = locationAdapter
-    }
-
-    private fun checkForAccess(path: String) {
-        if (mFirestore.collection(path).id.isNullOrEmpty()) {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Not allowed to use this feature!")
-                .setCancelable(false)
-                .setMessage("To get access send an email to ADMIN containing details like Image, Name and Geo location.")
-                .setIcon(R.drawable.logo)
-                .setPositiveButton(
-                    "Send Mail"
-                ) { _, _ ->
-
-                    Toast.makeText(
-                        this,
-                        "Opening in GMail",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val intent = Intent(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_EMAIL, arrayOf("heycodeinc@gmail.com"))
-                        .setType("text/html")
-                        .setPackage("com.google.android.gm")
-                        .putExtra(
-                            Intent.EXTRA_SUBJECT,
-                            "Register me for Locations Feature in AiZi"
-                        )
-                    intent.putExtra(
-                        Intent.EXTRA_TEXT,
-                        "Kindly provide me access to Important Locations feature in AiZi app." +
-                                " I have attached required details like Location name, Image with Latitude & Longitude."
-                    )
-                    finish()
-                    startActivity(intent)
-                }
-                .setNegativeButton(
-                    "Back"
-                ) { dialogInterface, _ ->
-                    dialogInterface.dismiss()
-                    finish()
-                }
-            val dialog = builder.create()
-            dialog.show()
-        }
     }
 
     override fun onStart() {

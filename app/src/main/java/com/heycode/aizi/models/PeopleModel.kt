@@ -1,4 +1,4 @@
-package com.heycode.aizi.dashboard.identify
+package com.heycode.aizi.models
 
 class PeopleModel(
     val name: String? = null,

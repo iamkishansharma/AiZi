@@ -17,4 +17,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirm_password">Confirm Password</string>
+
+    <string-array name="supportOption">
+        <item>Add person to remember</item>
+        <item>Add Location/Place</item>
+    </string-array>
 </resources>

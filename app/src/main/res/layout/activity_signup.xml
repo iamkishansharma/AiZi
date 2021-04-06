@@ -101,6 +101,7 @@
             android:padding="15dp"
             android:textColor="@color/purple_light"
             android:textColorHint="@color/edit_text_color" />
+
         <EditText
             android:id="@+id/signup_password_confirm"
             style="@style/TextAppearance.AppCompat.Medium"

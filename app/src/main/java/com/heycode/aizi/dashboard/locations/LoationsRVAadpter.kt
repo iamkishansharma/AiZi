@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.heycode.aizi.R
+import com.heycode.aizi.models.LocationModel
 import java.util.*
 
 class LocationsRVAdapter(options: FirestoreRecyclerOptions<LocationModel>, var context: Context) :

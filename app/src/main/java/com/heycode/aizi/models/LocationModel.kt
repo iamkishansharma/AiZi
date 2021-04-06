@@ -1,4 +1,4 @@
-package com.heycode.aizi.dashboard.locations
+package com.heycode.aizi.models
 
 class LocationModel(
     val image: String? = null,

@@ -1,9 +1,6 @@
 package com.heycode.aizi.dashboard.identify
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.heycode.aizi.R
+import com.heycode.aizi.models.PeopleModel
 
 class IdentifyActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -42,55 +40,10 @@ class IdentifyActivity : AppCompatActivity() {
                 .setQuery(query, PeopleModel::class.java)
                 .build()
 
-        checkForAccess(path)
-
         peopleAdapter = PeopleRVAdapter(allPeoples, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = peopleAdapter
-    }
-
-    private fun checkForAccess(path: String) {
-        if (mFirestore.collection(path).id.isNullOrEmpty()) {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Not allowed to use this feature!")
-                .setCancelable(false)
-                .setMessage("To get access send an email to ADMIN including Person's Image, Name and Phone No.")
-                .setIcon(R.drawable.logo)
-                .setPositiveButton(
-                    "Send Mail"
-                ) { _, _ ->
-
-                    Toast.makeText(
-                        this,
-                        "Opening in GMail",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val intent = Intent(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_EMAIL, arrayOf("heycodeinc@gmail.com"))
-                        .setType("text/html")
-                        .setPackage("com.google.android.gm")
-                        .putExtra(
-                            Intent.EXTRA_SUBJECT,
-                            "Register me for Identify Feature in AiZi"
-                        )
-                    intent.putExtra(
-                        Intent.EXTRA_TEXT,
-                        "Kindly provide me access to Identify people feature in AiZi app." +
-                                " Here, I have attached Person's name, image and phone number."
-                    )
-                    finish()
-                    startActivity(intent)
-                }
-                .setNegativeButton(
-                    "Back"
-                ) { dialogInterface, _ ->
-                    dialogInterface.dismiss()
-                    finish()
-                }
-            val dialog = builder.create()
-            dialog.show()
-        }
     }
 
     override fun onStart() {
