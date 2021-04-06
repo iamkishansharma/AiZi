@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
 import com.heycode.aizi.models.UserDataModel
 import java.io.ByteArrayOutputStream
+import java.util.regex.Pattern
 
 
 class SignupActivity : AppCompatActivity() {
@@ -32,6 +33,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var email_: EditText
     private lateinit var dob: EditText
     private lateinit var password_: EditText
+    private lateinit var passwordConfirm: EditText
     private var imageUri: Uri? = null
     private var imageSelected: Boolean = false
     private lateinit var imageSelectError: TextView
@@ -55,6 +57,7 @@ class SignupActivity : AppCompatActivity() {
         email_ = findViewById(R.id.signup_email)
         password_ = findViewById(R.id.signup_password)
         dob = findViewById(R.id.signup_dob)
+        passwordConfirm = findViewById(R.id.signup_password_confirm)
 
         imageView = findViewById(R.id.signup_image_upload)
         imageView.setOnClickListener {
@@ -90,7 +93,8 @@ class SignupActivity : AppCompatActivity() {
                     full_name,
                     dob,
                     email_,
-                    password_
+                    password_,
+                    passwordConfirm
                 )
             ) {
                 signUpWith(email_.text.toString(), password_.text.toString())
@@ -112,7 +116,8 @@ class SignupActivity : AppCompatActivity() {
         fullName: EditText,
         dob: EditText,
         email: EditText,
-        password: EditText
+        password: EditText,
+        passwordConfirm: EditText
     ): Boolean {
         if (!imageSelected) {
             imageSelectError.visibility = View.VISIBLE
@@ -123,6 +128,15 @@ class SignupActivity : AppCompatActivity() {
             fullName.error = "Required!"
             return false
         }
+        if (!fullName.text.matches(Pattern.compile("^[a-zA-Z\\s]+").toRegex())) {
+            fullName.error = "Invalid name"
+            return false
+        }
+        if (!passwordConfirm.text.equals(password.text)) {
+            passwordConfirm.error = "Password unmatched"
+            return false
+        }
+
         if (dob.text.isNullOrEmpty()) {
             dob.error = "Required!"
             return false
@@ -132,9 +146,13 @@ class SignupActivity : AppCompatActivity() {
             password.error = "Required!"
             return false
         }
+        if (password.text.length < 6) {
+            password.error = "length must be greater than 6"
+            return false
+        }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
-            email.error = "Not a valid email"
+            email.error = "Invalid email"
             return false
         }
         if (email.text.isNullOrEmpty()) {
