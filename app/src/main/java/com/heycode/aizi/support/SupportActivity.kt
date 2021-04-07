@@ -27,6 +27,7 @@ class SupportActivity : AppCompatActivity() {
     private lateinit var autoTextView: AutoCompleteTextView
     private lateinit var layoutOne: LinearLayout
     private lateinit var layoutTwo: LinearLayout
+    private lateinit var layoutThree: LinearLayout
     private lateinit var addButton: Button
 
     //Add Person to remember
@@ -38,6 +39,11 @@ class SupportActivity : AppCompatActivity() {
     private lateinit var placeName: TextInputEditText
     private lateinit var placeCoordinates: TextInputEditText
     private lateinit var placeImage: ShapeableImageView
+
+    //Add Daily Routine
+    private lateinit var routineName: TextInputEditText
+    private lateinit var routineTime: TextInputEditText
+    private lateinit var routineDate: TextInputEditText
 
 
     private var imageUri: Uri? = null
@@ -64,6 +70,7 @@ class SupportActivity : AppCompatActivity() {
 
         layoutOne = findViewById(R.id.first_layout)
         layoutTwo = findViewById(R.id.second_layout)
+        layoutThree = findViewById(R.id.third_layout)
         addButton = findViewById(R.id.support_add_button)
 
         autoTextView = findViewById(R.id.select_feature)
@@ -80,6 +87,7 @@ class SupportActivity : AppCompatActivity() {
                 0 -> {
                     layoutOne.visibility = View.VISIBLE
                     layoutTwo.visibility = View.GONE
+                    layoutThree.visibility = View.GONE
 
                     personImage = findViewById(R.id.support_person_image)
                     personName = findViewById(R.id.support_person_name)
@@ -113,6 +121,7 @@ class SupportActivity : AppCompatActivity() {
                 1 -> {
                     layoutOne.visibility = View.GONE
                     layoutTwo.visibility = View.VISIBLE
+                    layoutThree.visibility = View.GONE
 
                     placeImage = findViewById(R.id.support_place_image)
                     placeName = findViewById(R.id.support_place_name)
@@ -141,6 +150,12 @@ class SupportActivity : AppCompatActivity() {
                             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
                         }
                     }
+                }
+                ////////////////Third UI
+                2 -> {
+                    layoutOne.visibility = View.GONE
+                    layoutTwo.visibility = View.GONE
+                    layoutThree.visibility = View.VISIBLE
                 }
             }
         }

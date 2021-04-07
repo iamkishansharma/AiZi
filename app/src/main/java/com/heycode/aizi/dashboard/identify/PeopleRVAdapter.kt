@@ -6,6 +6,8 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,6 +22,7 @@ import com.heycode.aizi.models.PeopleModel
 
 class PeopleRVAdapter(options: FirestoreRecyclerOptions<PeopleModel>, var context: Context) :
     FirestoreRecyclerAdapter<PeopleModel, PeopleRVAdapter.MyViewHolder>(options) {
+    private var lastPosition = -1
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imageView: ImageView = itemView.findViewById(R.id.item_image_view)
@@ -46,5 +49,4 @@ class PeopleRVAdapter(options: FirestoreRecyclerOptions<PeopleModel>, var contex
             context.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))
         }
     }
-
 }

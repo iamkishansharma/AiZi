@@ -44,6 +44,7 @@ class IdentifyActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = peopleAdapter
+
     }
 
     override fun onStart() {

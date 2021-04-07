@@ -9,6 +9,7 @@
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
@@ -44,7 +45,6 @@
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:text="Dr. Kishan Sharma"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -137,6 +137,27 @@
             android:layout_below="@id/appoint_card"
             android:layout_toEndOf="@id/appoint_image_time"
             android:text=" 5:00 PM"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/appoint_image_date"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/appoint_card"
+            android:layout_margin="5dp"
+            android:layout_toStartOf="@id/appoint_text_date"
+            android:background="@drawable/button"
+            android:src="@drawable/ic_calendar" />
+
+        <TextView
+            android:id="@+id/appoint_text_date"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appoint_card"
+            android:layout_alignParentEnd="true"
+            android:text=" 2021-04-25"
             android:textColor="@color/white"
             android:textStyle="bold" />
 

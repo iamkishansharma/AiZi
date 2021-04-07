@@ -21,5 +21,7 @@
     <string-array name="supportOption">
         <item>Add person to remember</item>
         <item>Add Location/Place</item>
+        <item>Add Daily activity</item>
+        <item>Add Appointment</item>
     </string-array>
 </resources>
