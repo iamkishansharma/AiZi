@@ -1,60 +1,50 @@
 package com.heycode.aizi.dailyroutine
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.heycode.aizi.R
+import com.heycode.aizi.models.RoutineModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DailyRoutineFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DailyRoutineFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    //firebase
+    private lateinit var mFirestore: FirebaseFirestore
+    val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+    private lateinit var recyclerView: RecyclerView
+    private var dailyAdapter: DailyRecyclerViewAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_daily_routine, container, false)
-    }
+        val rootView = inflater.inflate(R.layout.fragment_daily_routine, container, false)
+        recyclerView = rootView.findViewById(R.id.daily_recycler_view)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DailyRoutineFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DailyRoutineFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        mFirestore = FirebaseFirestore.getInstance()
+        //RecyclerView setup from firebaseUI
+        val query: Query =
+            mFirestore.collection(user!!.uid).orderBy("title", Query.Direction.ASCENDING)
+
+        val allRoutines: FirestoreRecyclerOptions<RoutineModel> =
+            FirestoreRecyclerOptions.Builder<RoutineModel>()
+                .setQuery(query, RoutineModel::class.java)
+                .build()
+
+        dailyAdapter = DailyRecyclerViewAdapter(allRoutines, context!!)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = dailyAdapter
+
+        // Inflate the layout for this fragment
+        return rootView
     }
 }

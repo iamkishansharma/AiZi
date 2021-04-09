@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/daily_coordinateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple"
     tools:context=".dailyroutine.DailyRoutineFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/daily_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        tools:listitem="@layout/task_item" />
 
-        <TextView
-            style="@style/TextAppearance.MaterialComponents.Headline4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/daily_routine"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-    </RelativeLayout>
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

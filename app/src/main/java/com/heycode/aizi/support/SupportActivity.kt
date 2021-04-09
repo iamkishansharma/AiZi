@@ -20,6 +20,7 @@ import com.google.firebase.storage.StorageReference
 import com.heycode.aizi.R
 import com.heycode.aizi.models.LocationModel
 import com.heycode.aizi.models.PeopleModel
+import com.heycode.aizi.models.RoutineModel
 import java.io.ByteArrayOutputStream
 
 
@@ -103,7 +104,8 @@ class SupportActivity : AppCompatActivity() {
                             checkErrors(
                                 imageSelected1,
                                 personName,
-                                personPhoneNumber
+                                personPhoneNumber,
+                                personName
                             )
                         ) {
                             Toast.makeText(this, "1: Uploading....", Toast.LENGTH_SHORT).show()
@@ -137,7 +139,8 @@ class SupportActivity : AppCompatActivity() {
                             checkErrors(
                                 imageSelected2,
                                 placeName,
-                                placeCoordinates
+                                placeCoordinates,
+                                placeName
                             )
                         ) {
                             uploadImage(
@@ -156,6 +159,31 @@ class SupportActivity : AppCompatActivity() {
                     layoutOne.visibility = View.GONE
                     layoutTwo.visibility = View.GONE
                     layoutThree.visibility = View.VISIBLE
+
+                    routineName = findViewById(R.id.support_daily_title)
+                    routineDate = findViewById(R.id.support_daily_date)
+                    routineTime = findViewById(R.id.support_daily_time)
+
+
+                    addButton.setOnClickListener {
+                        if (
+                            checkErrors(
+                                true,
+                                routineName,
+                                routineDate,
+                                routineTime
+                            )
+                        ) {
+                            saveData(
+                                "routines",
+                                routineName.text.toString(),
+                                routineDate.text.toString(),
+                                routineTime.text.toString()
+                            )
+                        } else {
+                            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
         }
@@ -166,7 +194,8 @@ class SupportActivity : AppCompatActivity() {
     private fun checkErrors(
         isSelected: Boolean,
         name: TextInputEditText,
-        number: TextInputEditText
+        number: TextInputEditText,
+        more: TextInputEditText
     ): Boolean {
         if (!isSelected) {
             Toast.makeText(this, "Select Image first", Toast.LENGTH_LONG).show()
@@ -182,6 +211,10 @@ class SupportActivity : AppCompatActivity() {
         }
         if (name.text.isNullOrEmpty()) {
             name.error = "Required!"
+            return false
+        }
+        if (more.text.isNullOrEmpty()) {
+            more.error = "Required!"
             return false
         }
         return true
@@ -265,6 +298,22 @@ class SupportActivity : AppCompatActivity() {
                 val reference: DocumentReference =
                     mFirestore.collection("$to${user.uid}").document()
 
+                reference.set(userData).addOnSuccessListener {
+                    Toast.makeText(this, "$name added", Toast.LENGTH_SHORT).show()
+                    finish()
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Error occurred!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+            }
+        }
+        if (to == "routines") {
+//            Here name is TITLE
+//            number is DATE
+//            imageUrl is TIME
+            val userData = RoutineModel(name, number, imageUrl, "no")
+            if (user != null) {
                 reference.set(userData).addOnSuccessListener {
                     Toast.makeText(this, "$name added", Toast.LENGTH_SHORT).show()
                     finish()
