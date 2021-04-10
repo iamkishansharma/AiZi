@@ -132,7 +132,7 @@ class SignupActivity : AppCompatActivity() {
             fullName.error = "Invalid name"
             return false
         }
-        if (!passwordConfirm.text.equals(password.text)) {
+        if (passwordConfirm.text.toString() != password.text.toString()) {
             passwordConfirm.error = "Password unmatched"
             return false
         }
