@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -29,7 +28,7 @@ class DailyRecyclerViewAdapter(
         var title: TextView = itemView.findViewById(R.id.routine_title)
         var date: TextView = itemView.findViewById(R.id.routine_date)
         var clockImage: ImageButton = itemView.findViewById(R.id.clock_image)
-        var time: CheckBox = itemView.findViewById(R.id.routine_time)
+        var time: TextView = itemView.findViewById(R.id.routine_time)
 
     }
 
@@ -42,21 +41,26 @@ class DailyRecyclerViewAdapter(
         holder.title.text = model.title
         holder.date.text = model.date
         holder.time.text = model.time
-        holder.clockImage.isEnabled = model.activeAlarm.equals("yes")
+//        holder.clockImage.isEnabled = model.activeAlarm.equals("yes")
+        if (model.activeAlarm.equals("yes")) {
+            holder.clockImage.setImageDrawable(context.resources.getDrawable(R.drawable.ic_alarm))
+        } else {
+            holder.clockImage.setImageDrawable(context.resources.getDrawable(R.color.white))
+        }
 
-        holder.itemView.findViewById<CheckBox>(R.id.clock_image).setOnClickListener {
+        holder.itemView.findViewById<ImageButton>(R.id.clock_image).setOnClickListener {
             val docId: String = snapshots.getSnapshot(position).id
 
             val user = FirebaseAuth.getInstance().currentUser
             val reference: DocumentReference =
-                FirebaseFirestore.getInstance().collection("${user?.uid}").document(docId)
+                FirebaseFirestore.getInstance().collection("routines${user?.uid}").document(docId)
 
             val data = HashMap<String, Any>()
             if (model.activeAlarm == "no") {
-                data["completed"] = "yes"
+                data["activeAlarm"] = "yes"
                 Toast.makeText(context, "Alarm activated !", Toast.LENGTH_SHORT).show()
             } else {
-                data["completed"] = "no"
+                data["activeAlarm"] = "no"
             }
 
             reference.update(data).addOnSuccessListener {

@@ -12,7 +12,7 @@ import com.heycode.aizi.dashboard.appointment.AppointmentActivity
 import com.heycode.aizi.dashboard.identify.IdentifyActivity
 import com.heycode.aizi.dashboard.locations.LocationActivity
 import com.heycode.aizi.dashboard.todo.TodoActivity
-import com.heycode.aizi.support.SupportActivity
+import com.heycode.aizi.dashboard.support.SupportActivity
 
 
 class DashbaordFragment : Fragment() {

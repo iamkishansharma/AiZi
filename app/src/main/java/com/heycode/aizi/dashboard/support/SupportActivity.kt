@@ -1,11 +1,16 @@
-package com.heycode.aizi.support
+package com.heycode.aizi.dashboard.support
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.imageview.ShapeableImageView
@@ -163,6 +168,47 @@ class SupportActivity : AppCompatActivity() {
                     routineName = findViewById(R.id.support_daily_title)
                     routineDate = findViewById(R.id.support_daily_date)
                     routineTime = findViewById(R.id.support_daily_time)
+                    routineDate.setOnClickListener {
+                        hideKeyboard(routineName)
+                        val dialogInterface: DialogInterface = object : DialogInterface {
+                            override fun cancel() {
+                            }
+
+                            override fun dismiss() {
+                            }
+                        }
+                        val datePickerDialog = DatePickerDialog(this)
+                        datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
+                            routineDate.setText(String.format("%d/%d/%d", year, month, dayOfMonth))
+                        }
+                        datePickerDialog.onClick(dialogInterface, 1)
+                        datePickerDialog.show()
+                    }
+
+                    routineTime.setOnClickListener {
+                        val dialogInterface: DialogInterface = object : DialogInterface {
+                            override fun cancel() {
+                            }
+
+                            override fun dismiss() {
+                            }
+                        }
+
+                        val timePickerDialog = TimePickerDialog(
+                            this,
+                            { view, hourOfDay, minute ->
+                                routineTime.setText(
+                                    String.format(
+                                        "%d:%d",
+                                        hourOfDay,
+                                        minute
+                                    )
+                                )
+                            }, 0, 0, false
+                        )
+                        timePickerDialog.onClick(dialogInterface, 1)
+                        timePickerDialog.show()
+                    }
 
 
                     addButton.setOnClickListener {
@@ -176,7 +222,7 @@ class SupportActivity : AppCompatActivity() {
                         ) {
                             saveData(
                                 "routines",
-                                routineName.text.toString(),
+                                routineName.text.toString().trim(),
                                 routineDate.text.toString(),
                                 routineTime.text.toString()
                             )
@@ -264,8 +310,8 @@ class SupportActivity : AppCompatActivity() {
                 //navigating to different screen
                 saveData(
                     toFolder,
-                    name.text.toString(),
-                    number.text.toString(),
+                    name.text.toString().trim(),
+                    number.text.toString().trim(),
                     imageUrl
                 )
             }
@@ -293,7 +339,8 @@ class SupportActivity : AppCompatActivity() {
         }
         if (to == "locations") {
             val latlong: List<String> = number.split(",")
-            val userData = LocationModel(imageUrl, name, latlong[0], latlong[1])
+            val userData =
+                LocationModel(imageUrl, name, latlong[0], latlong[1])
             if (user != null) {
                 val reference: DocumentReference =
                     mFirestore.collection("$to${user.uid}").document()
@@ -325,5 +372,10 @@ class SupportActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun hideKeyboard(editText: TextInputEditText?) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editText!!.windowToken, 0)
     }
 }

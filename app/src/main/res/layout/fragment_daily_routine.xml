@@ -4,7 +4,6 @@
     android:id="@+id/daily_coordinateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
     tools:context=".dailyroutine.DailyRoutineFragment">
 
     <androidx.recyclerview.widget.RecyclerView
