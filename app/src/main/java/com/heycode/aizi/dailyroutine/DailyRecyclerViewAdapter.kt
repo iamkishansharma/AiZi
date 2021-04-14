@@ -1,6 +1,9 @@
 package com.heycode.aizi.dailyroutine
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +19,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.heycode.aizi.R
 import com.heycode.aizi.models.RoutineModel
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class DailyRecyclerViewAdapter(
@@ -38,6 +43,10 @@ class DailyRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: RoutineModel) {
+        val alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 10, intent, 0)
+
         holder.title.text = model.title
         holder.date.text = model.date
         holder.time.text = model.time
@@ -58,9 +67,35 @@ class DailyRecyclerViewAdapter(
             val data = HashMap<String, Any>()
             if (model.activeAlarm == "no") {
                 data["activeAlarm"] = "yes"
-                Toast.makeText(context, "Alarm activated !", Toast.LENGTH_SHORT).show()
+                val cal: Calendar = Calendar.getInstance()
+                cal.timeInMillis = System.currentTimeMillis()
+                cal.clear()
+                val date = holder.date.text.split("/").toTypedArray()
+                val time = holder.time.text.split(":").toTypedArray()
+
+                Toast.makeText(
+                    context,
+                    "Alarm activated!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                cal.set(
+                    date[0].toInt(),
+                    date[1].toInt(),
+                    date[2].toInt(),
+                    time[0].toInt(),
+                    time[1].toInt()
+                )
+                alarmMgr?.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    cal.timeInMillis,
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent
+                )
+
             } else {
                 data["activeAlarm"] = "no"
+                alarmMgr?.cancel(pendingIntent)
+                AlarmReceiver.stopMedia()
             }
 
             reference.update(data).addOnSuccessListener {
