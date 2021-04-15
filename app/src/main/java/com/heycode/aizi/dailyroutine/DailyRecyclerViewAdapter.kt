@@ -45,18 +45,19 @@ class DailyRecyclerViewAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: RoutineModel) {
         val alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
         val intent = Intent(context, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 10, intent, 0)
+        val pendingIntent = PendingIntent.getBroadcast(context, position, intent, 0)
 
         holder.title.text = model.title
         holder.date.text = model.date
         holder.time.text = model.time
         if (model.activeAlarm.equals("yes")) {
             holder.clockImage.setImageDrawable(context.resources.getDrawable(R.drawable.ic_alarm))
+            holder.clockImage.alpha = 1.0F
         } else {
             holder.clockImage.alpha = 0.2F
         }
 
-        holder.itemView.findViewById<ImageButton>(R.id.clock_image).setOnClickListener {
+        holder.clockImage.setOnClickListener {
             val docId: String = snapshots.getSnapshot(position).id
 
             val user = FirebaseAuth.getInstance().currentUser
