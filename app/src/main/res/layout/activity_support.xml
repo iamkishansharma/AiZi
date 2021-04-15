@@ -15,7 +15,8 @@
             android:id="@+id/support_dropdown"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Add data to server">
 
             <AutoCompleteTextView
                 android:id="@+id/select_feature"
@@ -23,6 +24,75 @@
                 android:layout_height="wrap_content"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
+        <!--        Layout compulsory-->
+        <LinearLayout
+            android:id="@+id/zero_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/support_dropdown"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/teal_200"
+                android:elevation="8dp"
+                android:padding="10dp"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/support_image"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_arrow_upward"
+                        android:backgroundTint="@color/purple" />
+
+                    <TextView
+                        android:id="@+id/s_title"
+                        style="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/support_image"
+                        android:backgroundTint="@color/purple_card"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Welcome to AiZi Support"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/s_title"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="@color/purple_card"
+                        android:text="Here you can configure your data to different section.\n1. Click and select an option from top dropdown\n2. Fill data into the required fields\n3. Click on ADD button below"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="@color/purple_card"
+                        android:gravity="center"
+                        android:text="HeyCode Inc\nKing Road, Nepal\nheycodeinc@gmail.com"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
         <!--    LayOut One   -->
         <LinearLayout

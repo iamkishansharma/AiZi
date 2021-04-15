@@ -67,7 +67,7 @@ class SupportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_support)
         //Action Bar
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.color.purple))
-        supportActionBar?.title = "Support"
+        supportActionBar?.title = "AiZi Support"
 
         //firebase
         mAuth = FirebaseAuth.getInstance()
@@ -91,9 +91,11 @@ class SupportActivity : AppCompatActivity() {
         autoTextView.setOnItemClickListener { parent, view, position, id ->
             when (position) {
                 0 -> {
+                    supportActionBar?.title = "Add People to Identify"
                     layoutOne.visibility = View.VISIBLE
                     layoutTwo.visibility = View.GONE
                     layoutThree.visibility = View.GONE
+                    findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
 
                     personImage = findViewById(R.id.support_person_image)
                     personName = findViewById(R.id.support_person_name)
@@ -126,9 +128,11 @@ class SupportActivity : AppCompatActivity() {
                     }
                 }
                 1 -> {
+                    supportActionBar?.title = "Add Location"
                     layoutOne.visibility = View.GONE
                     layoutTwo.visibility = View.VISIBLE
                     layoutThree.visibility = View.GONE
+                    findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
 
                     placeImage = findViewById(R.id.support_place_image)
                     placeName = findViewById(R.id.support_place_name)
@@ -161,9 +165,11 @@ class SupportActivity : AppCompatActivity() {
                 }
                 ////////////////Third UI
                 2 -> {
+                    supportActionBar?.title = "Add Daily Activity"
                     layoutOne.visibility = View.GONE
                     layoutTwo.visibility = View.GONE
                     layoutThree.visibility = View.VISIBLE
+                    findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
 
                     routineName = findViewById(R.id.support_daily_title)
                     routineDate = findViewById(R.id.support_daily_date)
