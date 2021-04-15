@@ -50,11 +50,10 @@ class DailyRecyclerViewAdapter(
         holder.title.text = model.title
         holder.date.text = model.date
         holder.time.text = model.time
-//        holder.clockImage.isEnabled = model.activeAlarm.equals("yes")
         if (model.activeAlarm.equals("yes")) {
             holder.clockImage.setImageDrawable(context.resources.getDrawable(R.drawable.ic_alarm))
         } else {
-            holder.clockImage.setImageDrawable(context.resources.getDrawable(R.color.white))
+            holder.clockImage.alpha = 0.2F
         }
 
         holder.itemView.findViewById<ImageButton>(R.id.clock_image).setOnClickListener {
@@ -67,24 +66,19 @@ class DailyRecyclerViewAdapter(
             val data = HashMap<String, Any>()
             if (model.activeAlarm == "no") {
                 data["activeAlarm"] = "yes"
-                val cal: Calendar = Calendar.getInstance()
-                cal.timeInMillis = System.currentTimeMillis()
-                cal.clear()
-                val date = holder.date.text.split("/").toTypedArray()
-                val time = holder.time.text.split(":").toTypedArray()
 
+                val time = holder.time.text.split(":").toTypedArray()
+                val cal: Calendar = Calendar.getInstance().apply {
+                    timeInMillis = System.currentTimeMillis()
+                    set(Calendar.HOUR_OF_DAY, time[0].toInt())
+                    set(Calendar.MINUTE, time[1].toInt())
+                }
                 Toast.makeText(
                     context,
                     "Alarm activated!",
                     Toast.LENGTH_SHORT
                 ).show()
-                cal.set(
-                    date[0].toInt(),
-                    date[1].toInt(),
-                    date[2].toInt(),
-                    time[0].toInt(),
-                    time[1].toInt()
-                )
+
                 alarmMgr?.setRepeating(
                     AlarmManager.RTC_WAKEUP,
                     cal.timeInMillis,
