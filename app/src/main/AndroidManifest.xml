@@ -46,6 +46,10 @@
             android:name=".dashboard.Attempt_Quiz_Section.AttemptTestDetail"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".dashboard.Attempt_Quiz_Section.Create_Test.CreateTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar" />
 
 
 
