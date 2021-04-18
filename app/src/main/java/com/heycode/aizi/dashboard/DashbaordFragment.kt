@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.heycode.aizi.R
+import com.heycode.aizi.dashboard.Attempt_Quiz_Section.Create_Test.CreateTestActivity
+import com.heycode.aizi.dashboard.Attempt_Quiz_Section.TestsActivity
 import com.heycode.aizi.dashboard.appointment.AppointmentActivity
 import com.heycode.aizi.dashboard.identify.IdentifyActivity
 import com.heycode.aizi.dashboard.locations.LocationActivity
@@ -37,6 +40,10 @@ class DashbaordFragment : Fragment() {
             startActivity(Intent(activity, TodoActivity::class.java))
         }
         rootView.findViewById<CardView>(R.id.card_training).setOnClickListener {
+            startActivity(Intent(activity, TestsActivity::class.java))
+        }
+        rootView.findViewById<FloatingActionButton>(R.id.addTest).setOnClickListener {
+            startActivity(Intent(activity, CreateTestActivity::class.java))
         }
         rootView.findViewById<CardView>(R.id.card_appointment).setOnClickListener {
             startActivity(Intent(activity, AppointmentActivity::class.java))
