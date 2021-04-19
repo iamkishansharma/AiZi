@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +32,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,11 +86,11 @@ public class AttemptTest extends AppCompatActivity {
         timer = CommanClass.time * 60 * 1000;
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         answers = new String[questions.size()];
         setSupportActionBar(toolbar);
         setTitle(TESTNAME);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         scrollView = findViewById(R.id.discrete);
         final QuestionAdapter questionAdapter = new QuestionAdapter(questions);
         scrollView.setAdapter(questionAdapter);
@@ -233,7 +236,13 @@ public class AttemptTest extends AppCompatActivity {
                 builderInner.show();
             }
         });
-        builderSingle.show();
+        try {
+            builderSingle.show();
+        }
+        catch (WindowManager.BadTokenException e)
+        {
+            Log.i("Window Manager ",e.getMessage());
+        }
 
     }
 

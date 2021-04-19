@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,13 +13,15 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="6dp"
         app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="88dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:background="@color/purple_light">
+            android:background="#ffff"
+            >
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -39,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/attempt"
-                android:id="@+id/item_button" />
+                android:id="@+id/item_button"
+             />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

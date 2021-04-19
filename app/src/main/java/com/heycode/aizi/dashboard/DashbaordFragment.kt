@@ -42,14 +42,14 @@ class DashbaordFragment : Fragment() {
         rootView.findViewById<CardView>(R.id.card_training).setOnClickListener {
             startActivity(Intent(activity, TestsActivity::class.java))
         }
-        rootView.findViewById<FloatingActionButton>(R.id.addTest).setOnClickListener {
-            startActivity(Intent(activity, CreateTestActivity::class.java))
-        }
         rootView.findViewById<CardView>(R.id.card_appointment).setOnClickListener {
             startActivity(Intent(activity, AppointmentActivity::class.java))
         }
         rootView.findViewById<CardView>(R.id.card_support).setOnClickListener {
             startActivity(Intent(activity, SupportActivity::class.java))
+        }
+        rootView.findViewById<FloatingActionButton>(R.id.addTest).setOnClickListener {
+            startActivity(Intent(activity, CreateTestActivity::class.java))
         }
         return rootView
     }
