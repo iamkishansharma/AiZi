@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/main_bg">
 
 
     <ScrollView
@@ -51,7 +52,14 @@
             android:layout_height="150dp"
             android:id="@+id/questionView"
             android:layout_marginBottom="30sp"
-            android:hint="Type your question here" />
+            android:hint="Type your question here"
+            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +70,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="A"
-                android:id="@+id/aRadio" />
+                android:id="@+id/aRadio"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                />
 
             <EditText
                 android:inputType="text"
@@ -70,9 +81,18 @@
                 android:layout_height="wrap_content"
                 android:hint="OPTION A"
                 android:id="@+id/aText"
-                android:layout_marginStart="20sp" />
+                android:layout_marginStart="20sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white"
+            >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +104,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="B"
-                android:id="@+id/bRadio" />
+                android:id="@+id/bRadio"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"/>
 
             <EditText
                 android:inputType="text"
@@ -92,9 +114,17 @@
                 android:layout_height="wrap_content"
                 android:hint="OPTION B"
                 android:id="@+id/bText"
-                android:layout_marginStart="20sp" />
+                android:layout_marginStart="20sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,7 +134,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="C"
-                android:id="@+id/cRadio" />
+                android:id="@+id/cRadio"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"/>
 
             <EditText
                 android:inputType="text"
@@ -112,9 +144,17 @@
                 android:layout_height="wrap_content"
                 android:hint="OPTION C"
                 android:id="@+id/cText"
-                android:layout_marginStart="20sp" />
+                android:layout_marginStart="20sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,7 +165,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="D"
-                android:id="@+id/dRadio" />
+                android:id="@+id/dRadio"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"/>
 
             <EditText
                 android:inputType="text"
@@ -133,16 +175,18 @@
                 android:layout_height="wrap_content"
                 android:hint="OPTION D"
                 android:id="@+id/dText"
-                android:layout_marginStart="20sp" />
+                android:layout_marginStart="20sp"
+                android:textColor="@color/black"/>
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginRight="75dp"
             android:id="@+id/explanationView"
             android:layout_marginBottom="30sp"
-            android:hint="Type your explanation here" />
-
+            android:hint="Type your explanation here"
+            android:textColor="@color/white"/>
     </LinearLayout>
 </ScrollView>
 </RelativeLayout>

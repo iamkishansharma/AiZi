@@ -507,12 +507,9 @@ public class AttemptTest extends AppCompatActivity {
 
             ((Button) convertView).setText("" + (i + 1));
 
-            (convertView).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //setNextPrevButton(i);
-                    scrollView.smoothScrollToPosition(i);
-                }
+            (convertView).setOnClickListener(view1 -> {
+                //setNextPrevButton(i);
+                scrollView.smoothScrollToPosition(i);
             });
             return convertView;
         }
