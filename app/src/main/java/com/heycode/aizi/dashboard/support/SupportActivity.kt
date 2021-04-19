@@ -228,7 +228,7 @@ class SupportActivity : AppCompatActivity() {
                         ) {
                             saveData(
                                 "routines",
-                                routineName.text.toString().trim(),
+                                routineName.text.toString(),
                                 routineDate.text.toString(),
                                 routineTime.text.toString()
                             )
@@ -253,19 +253,19 @@ class SupportActivity : AppCompatActivity() {
             Toast.makeText(this, "Select Image first", Toast.LENGTH_LONG).show()
             return false
         }
-        if (name.text.isNullOrEmpty()) {
+        if (name.text.toString().trim().isEmpty()) {
             name.error = "Required!"
             return false
         }
-        if (number.text.isNullOrEmpty()) {
+        if (number.text.toString().trim().isEmpty()) {
             name.error = "Required!"
             return false
         }
-        if (name.text.isNullOrEmpty()) {
+        if (name.text.toString().trim().isEmpty()) {
             name.error = "Required!"
             return false
         }
-        if (more.text.isNullOrEmpty()) {
+        if (more.text.toString().trim().isEmpty()) {
             more.error = "Required!"
             return false
         }
@@ -316,8 +316,8 @@ class SupportActivity : AppCompatActivity() {
                 //navigating to different screen
                 saveData(
                     toFolder,
-                    name.text.toString().trim(),
-                    number.text.toString().trim(),
+                    name.text.toString(),
+                    number.text.toString(),
                     imageUrl
                 )
             }
