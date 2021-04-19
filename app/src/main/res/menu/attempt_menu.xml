@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/info"
+        android:title="info"
+        android:icon="@drawable/ic_edit"
+        android:visible="true"
+        android:enabled="true"
+        android:iconTint="@android:color/black"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/counter"
+        android:title="Timer"
+        android:visible="true"
+        android:iconTint="@android:color/black"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/submit"
+        android:title="Submit"
+        android:iconTint="@android:color/black"
+        android:visible="true"
+        app:showAsAction="always" />
+</menu>

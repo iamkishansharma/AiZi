@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.heycode.aizi"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -69,5 +69,11 @@ dependencies {
 
     //Graph
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //scrollview
+    implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
+
+    //progress bar
+    implementation 'com.wang.avi:library:2.1.3'
 
 }

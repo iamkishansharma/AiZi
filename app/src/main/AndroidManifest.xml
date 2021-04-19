@@ -17,8 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AiZi"
         android:usesCleartextTraffic="true">
-        <receiver android:name=".dailyroutine.AlarmReceiver"
-            android:enabled="true"/>
+        <activity android:name=".dashboard.training.Quizcat"></activity>
+
+        <receiver
+            android:name=".dailyroutine.AlarmReceiver"
+            android:enabled="true" />
 
         <activity android:name=".dashboard.support.SupportActivity" />
         <activity android:name=".dashboard.appointment.AppointmentActivity" />
@@ -31,6 +34,25 @@
             android:name=".SignupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".dashboard.Attempt_Quiz_Section.TestsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".dashboard.Attempt_Quiz_Section.AttemptTest"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".dashboard.Attempt_Quiz_Section.AttemptTestDetail"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".dashboard.Attempt_Quiz_Section.Create_Test.CreateTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar" />
+
+
+
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
