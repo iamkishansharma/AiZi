@@ -48,6 +48,7 @@
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="Dr. Kishan Sharma"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -134,10 +135,11 @@
 
         <TextView
             android:id="@+id/appoint_text_time"
-            style="@style/TextAppearance.AppCompat.Large"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/appoint_card"
+            android:layout_margin="5dp"
             android:layout_toEndOf="@id/appoint_image_time"
             android:text=" 5:00 PM"
             android:textColor="@color/white"
@@ -155,11 +157,12 @@
 
         <TextView
             android:id="@+id/appoint_text_date"
-            style="@style/TextAppearance.AppCompat.Large"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/appoint_card"
             android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
             android:text=" 2021-04-25"
             android:textColor="@color/white"
             android:textStyle="bold" />

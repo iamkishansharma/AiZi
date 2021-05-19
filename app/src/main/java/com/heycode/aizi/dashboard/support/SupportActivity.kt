@@ -93,6 +93,7 @@ class SupportActivity : AppCompatActivity() {
         layoutOne = findViewById(R.id.first_layout)
         layoutTwo = findViewById(R.id.second_layout)
         layoutThree = findViewById(R.id.third_layout)
+        layoutFour = findViewById(R.id.fourth_layout)
         addButton = findViewById(R.id.support_add_button)
 
         autoTextView = findViewById(R.id.select_feature)
@@ -278,12 +279,12 @@ class SupportActivity : AppCompatActivity() {
                     layoutThree.visibility = View.GONE
                     layoutFour.visibility = View.VISIBLE
 
+                    appointImage = findViewById(R.id.appoint_image)
                     appointName = findViewById(R.id.appoint_name)
                     appointTitle = findViewById(R.id.appoint_title)
                     appointAddress = findViewById(R.id.appoint_address)
+                    appointWork = findViewById(R.id.appoint_work)
                     appointDate = findViewById(R.id.appoint_date)
-                    appointTime = findViewById(R.id.appoint_time)
-                    appointTime = findViewById(R.id.appoint_time)
                     appointTime = findViewById(R.id.appoint_time)
 
                     appointImage.setOnClickListener {

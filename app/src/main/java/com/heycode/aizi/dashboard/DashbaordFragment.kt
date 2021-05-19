@@ -14,8 +14,8 @@ import com.heycode.aizi.dashboard.Attempt_Quiz_Section.TestsActivity
 import com.heycode.aizi.dashboard.appointment.AppointmentActivity
 import com.heycode.aizi.dashboard.identify.IdentifyActivity
 import com.heycode.aizi.dashboard.locations.LocationActivity
-import com.heycode.aizi.dashboard.todo.TodoActivity
 import com.heycode.aizi.dashboard.support.SupportActivity
+import com.heycode.aizi.dashboard.todo.TodoActivity
 
 
 class DashbaordFragment : Fragment() {

@@ -294,6 +294,7 @@
         </LinearLayout>
         <!--        Layout 4-->
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/fourth_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/support_dropdown"
@@ -303,7 +304,6 @@
             android:visibility="gone">
 
             <LinearLayout
-                android:id="@+id/fourth_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/support_dropdown"

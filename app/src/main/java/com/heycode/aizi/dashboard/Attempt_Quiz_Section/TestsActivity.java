@@ -46,13 +46,13 @@ public class TestsActivity extends AppCompatActivity {
     private TestAdapter testAdapter;
     private int lastPos = -1;
 
-    ArrayList<Test> tests=new ArrayList<>();
+    ArrayList<Test> tests = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tests);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
         setSupportActionBar(toolbar);
         avLoadingIndicatorView = findViewById(R.id.loader1);
@@ -61,10 +61,10 @@ public class TestsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar())
                 .setDisplayHomeAsUpEnabled(true);
-        database= FirebaseDatabase.getInstance();
-        myRef=database.getReference();
-        listView=findViewById(R.id.test_listview);
-        testAdapter=new TestAdapter(TestsActivity.this,tests);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+        listView = findViewById(R.id.test_listview);
+        testAdapter = new TestAdapter(TestsActivity.this, tests);
         listView.setAdapter(testAdapter);
         getQues();
 
@@ -81,42 +81,42 @@ public class TestsActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        if(id==android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void getQues(){
+    public void getQues() {
         //addListenerForSingleValueEvent
         myRef.child("tests").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 tests.clear();
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Test t=new Test();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Test t = new Test();
                     t.setName(snapshot.getKey());
                     t.setTime(Long.parseLong(snapshot.child("Time").getValue().toString()));
-                    ArrayList<Question> ques=new ArrayList<>();
-                    for (DataSnapshot qSnap:snapshot.child("Questions").getChildren()){
+                    ArrayList<Question> ques = new ArrayList<>();
+                    for (DataSnapshot qSnap : snapshot.child("Questions").getChildren()) {
                         ques.add(qSnap.getValue(Question.class));
                     }
                     t.setQuestions(ques);
                     tests.add(t);
 
                 }
-                testAdapter.dataList=tests;
+                testAdapter.dataList = tests;
                 testAdapter.notifyDataSetChanged();
                 avLoadingIndicatorView.setVisibility(View.GONE);
                 avLoadingIndicatorView.hide();
-                Log.e("The read success: " ,"su"+tests.size());
+                Log.e("The read success: ", "su" + tests.size());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 avLoadingIndicatorView.setVisibility(View.GONE);
                 avLoadingIndicatorView.hide();
-                Log.e("The read failed: " ,databaseError.getMessage());
+                Log.e("The read failed: ", databaseError.getMessage());
             }
         });
     }
@@ -124,8 +124,9 @@ public class TestsActivity extends AppCompatActivity {
     class TestAdapter extends ArrayAdapter<Test> implements Filterable {
         private Context mContext;
         ArrayList<Test> dataList;
+
         public TestAdapter(Context context, ArrayList<Test> list) {
-            super(context, 0 , list);
+            super(context, 0, list);
             mContext = context;
             dataList = list;
         }
@@ -135,24 +136,24 @@ public class TestsActivity extends AppCompatActivity {
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             View listItem = convertView;
-            if(listItem == null)
-                listItem = LayoutInflater.from(mContext).inflate(R.layout.test_item,parent,false);
+            if (listItem == null)
+                listItem = LayoutInflater.from(mContext).inflate(R.layout.test_item, parent, false);
 
-            ((ImageView)listItem.findViewById(R.id.item_imageView)).
-                    setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_account_box));
+            ((ImageView) listItem.findViewById(R.id.item_imageView)).
+                    setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_account_box));
 
-            ((TextView)listItem.findViewById(R.id.item_textView))
-                    .setText(dataList.get(position).getName()+" : "+dataList.get(position).getTime()+"Min");
+            ((TextView) listItem.findViewById(R.id.item_textView))
+                    .setText(dataList.get(position).getName() + " : " + dataList.get(position).getTime() + "Min");
 
-            ((Button)listItem.findViewById(R.id.item_button)).setText("Attempt");
+            ((Button) listItem.findViewById(R.id.item_button)).setText("Attempt");
 
             (listItem.findViewById(R.id.item_button)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(mContext, AttemptTest.class);
-                    CommanClass.testName=dataList.get(position).getName();
-                    CommanClass.Questions=dataList.get(position).getQuestions();
-                    CommanClass.time=dataList.get(position).getTime();
+                    Intent intent = new Intent(mContext, AttemptTest.class);
+                    CommanClass.testName = dataList.get(position).getName();
+                    CommanClass.Questions = dataList.get(position).getQuestions();
+                    CommanClass.time = dataList.get(position).getTime();
                     startActivity(intent);
                 }
             });

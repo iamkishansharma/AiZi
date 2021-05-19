@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="48dp"
     tools:context=".dashboard.DashbaordFragment">
 
     <ScrollView
@@ -366,11 +367,12 @@
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/addTest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_edit"
-                    android:id="@+id/addTest"/>
+                    android:src="@drawable/ic_edit" />
             </LinearLayout>
 
         </RelativeLayout>

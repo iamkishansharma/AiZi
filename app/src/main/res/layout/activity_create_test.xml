@@ -1,103 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
     <include layout="@layout/content_create_quiz" />
 
     <RelativeLayout
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|bottom">
+
         <androidx.cardview.widget.CardView
-            android:layout_height="wrap_content"
-            android:layout_width="120dp"
             android:id="@+id/nextfab"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:visibility="visible"
-            app:cardElevation="10dp"
             app:cardCornerRadius="5dp"
-            android:layout_margin="20dp">
+            app:cardElevation="10dp">
 
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:text="Next"
-                android:layout_gravity="center"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="start|bottom">
+
         <androidx.cardview.widget.CardView
-            android:layout_height="wrap_content"
-            android:layout_width="120dp"
             android:id="@+id/pre_card"
-            android:visibility="invisible"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/purple_light"
-            android:layout_margin="20dp">
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                android:text="Previous"
-                android:textColor="@android:color/black"/>
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="start|bottom">
-        <androidx.cardview.widget.CardView
-            android:layout_height="wrap_content"
             android:layout_width="120dp"
-            android:id="@+id/update_card"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:visibility="invisible"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="5dp"
             app:cardBackgroundColor="@color/purple_light"
-            android:layout_margin="20dp">
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:text="Previous"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|bottom">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/update_card"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:visibility="invisible"
+            app:cardBackgroundColor="@color/purple_light"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Previous"
+                android:textColor="@android:color/black" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
 
     <RelativeLayout
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end">
+
         <androidx.cardview.widget.CardView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:visibility="visible"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="5dp"
             app:cardBackgroundColor="@color/purple_light"
-            android:layout_margin="20dp">
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:text="Save and upload"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/white" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 

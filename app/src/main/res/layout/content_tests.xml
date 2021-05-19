@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="?android:attr/actionBarSize">
 
 
     <ListView
+        android:id="@+id/test_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/test_listview"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         tools:listitem="@layout/test_item">
@@ -18,26 +18,26 @@
     </ListView>
 
     <RelativeLayout
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|bottom">
 
         <androidx.cardview.widget.CardView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/download_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:visibility="invisible"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="5dp"
             app:cardBackgroundColor="@color/purple_light"
-            android:layout_margin="20dp">
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
 
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/download"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
@@ -46,10 +46,10 @@
         style="@style/AVLoadingIndicatorView.Large"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_gravity="center"
         android:elevation="10dp"
         android:visibility="gone"
         app:indicatorColor="@android:color/holo_orange_light"
-        android:layout_gravity="center"
         app:indicatorName="BallScaleMultipleIndicator" />
 
 </FrameLayout>
