@@ -13,6 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
 import com.heycode.aizi.R
+import com.heycode.aizi.models.AppointmentModel
 import com.heycode.aizi.models.LocationModel
 import com.heycode.aizi.models.PeopleModel
 import com.heycode.aizi.models.RoutineModel
@@ -34,7 +36,10 @@ class SupportActivity : AppCompatActivity() {
     private lateinit var layoutOne: LinearLayout
     private lateinit var layoutTwo: LinearLayout
     private lateinit var layoutThree: LinearLayout
+    private lateinit var layoutFour: NestedScrollView
     private lateinit var addButton: Button
+
+    private var imageUri: Uri? = null
 
     //Add Person to remember
     private lateinit var personName: TextInputEditText
@@ -52,9 +57,20 @@ class SupportActivity : AppCompatActivity() {
     private lateinit var routineDate: TextInputEditText
 
 
-    private var imageUri: Uri? = null
     private var imageSelected1: Boolean = false
     private var imageSelected2: Boolean = false
+
+
+    //Add Appointment
+    private lateinit var appointImage: ShapeableImageView
+    private lateinit var appointName: TextInputEditText
+    private lateinit var appointTitle: TextInputEditText
+    private lateinit var appointAddress: TextInputEditText
+    private lateinit var appointDate: TextInputEditText
+    private lateinit var appointTime: TextInputEditText
+    private lateinit var appointWork: TextInputEditText
+
+    private var imageSelected3: Boolean = false
 
     //firebase
     private lateinit var mAuth: FirebaseAuth
@@ -112,6 +128,7 @@ class SupportActivity : AppCompatActivity() {
                                 imageSelected1,
                                 personName,
                                 personPhoneNumber,
+                                personName,
                                 personName
                             )
                         ) {
@@ -120,7 +137,11 @@ class SupportActivity : AppCompatActivity() {
                                 personImage,
                                 "peoples",
                                 personName,
-                                personPhoneNumber
+                                personPhoneNumber,
+                                personName,//raw data
+                                personName,//raw data
+                                personName,//raw data
+                                personName//raw data
                             )
                         } else {
                             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
@@ -149,6 +170,7 @@ class SupportActivity : AppCompatActivity() {
                                 imageSelected2,
                                 placeName,
                                 placeCoordinates,
+                                placeName,
                                 placeName
                             )
                         ) {
@@ -156,7 +178,11 @@ class SupportActivity : AppCompatActivity() {
                                 placeImage,
                                 "locations",
                                 placeName,
-                                placeCoordinates
+                                placeCoordinates,
+                                placeName,//these are not required data
+                                placeName,//these are not required data
+                                placeName,//these are not required data
+                                placeName//these are not required data
                             )
                         } else {
                             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
@@ -223,19 +249,117 @@ class SupportActivity : AppCompatActivity() {
                                 true,
                                 routineName,
                                 routineDate,
-                                routineTime
+                                routineTime,
+                                routineName
                             )
                         ) {
                             saveData(
                                 "routines",
                                 routineName.text.toString(),
                                 routineDate.text.toString(),
-                                routineTime.text.toString()
+                                routineTime.text.toString(),
+                                "",//raw data
+                                "",//raw data
+                                "",//raw data
+                                ""//raw data
                             )
                         } else {
                             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
                         }
                     }
+                }
+
+                //////// 4th UI
+                3 -> {
+                    supportActionBar?.title = "Add Appointment"
+                    findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
+                    layoutOne.visibility = View.GONE
+                    layoutTwo.visibility = View.GONE
+                    layoutThree.visibility = View.GONE
+                    layoutFour.visibility = View.VISIBLE
+
+                    appointName = findViewById(R.id.appoint_name)
+                    appointTitle = findViewById(R.id.appoint_title)
+                    appointAddress = findViewById(R.id.appoint_address)
+                    appointDate = findViewById(R.id.appoint_date)
+                    appointTime = findViewById(R.id.appoint_time)
+                    appointTime = findViewById(R.id.appoint_time)
+                    appointTime = findViewById(R.id.appoint_time)
+
+                    appointImage.setOnClickListener {
+                        val gallery =
+                            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+                        startActivityForResult(gallery, 104)
+                    }
+
+                    appointDate.setOnClickListener {
+                        hideKeyboard(appointName)
+                        val dialogInterface: DialogInterface = object : DialogInterface {
+                            override fun cancel() {
+                            }
+
+                            override fun dismiss() {
+                            }
+                        }
+                        val datePickerDialog = DatePickerDialog(this)
+                        datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
+                            appointDate.setText(String.format("%d/%d/%d", year, month, dayOfMonth))
+                        }
+                        datePickerDialog.onClick(dialogInterface, 1)
+                        datePickerDialog.show()
+                    }
+
+                    appointTime.setOnClickListener {
+                        val dialogInterface: DialogInterface = object : DialogInterface {
+                            override fun cancel() {
+                            }
+
+                            override fun dismiss() {
+                            }
+                        }
+
+                        val timePickerDialog = TimePickerDialog(
+                            this,
+                            { view, hourOfDay, minute ->
+                                appointTime.setText(
+                                    String.format(
+                                        "%d:%d",
+                                        hourOfDay,
+                                        minute
+                                    )
+                                )
+                            }, 0, 0, false
+                        )
+                        timePickerDialog.onClick(dialogInterface, 1)
+                        timePickerDialog.show()
+                    }
+                    // Click on add button
+                    addButton.setOnClickListener {
+                        if (
+                            checkErrors(
+                                imageSelected3,
+                                appointName,
+                                appointAddress,
+                                appointDate,
+                                appointTime
+                            )
+                        ) {
+                            uploadImage(
+                                appointImage,
+                                "appointments",
+                                appointName,
+                                appointTitle,
+                                appointWork,
+                                appointAddress,
+                                appointTime,
+                                appointDate
+                            )
+
+                        } else {
+                            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
                 }
             }
         }
@@ -247,7 +371,8 @@ class SupportActivity : AppCompatActivity() {
         isSelected: Boolean,
         name: TextInputEditText,
         number: TextInputEditText,
-        more: TextInputEditText
+        more: TextInputEditText,
+        more2: TextInputEditText
     ): Boolean {
         if (!isSelected) {
             Toast.makeText(this, "Select Image first", Toast.LENGTH_LONG).show()
@@ -269,6 +394,10 @@ class SupportActivity : AppCompatActivity() {
             more.error = "Required!"
             return false
         }
+        if (more2.text.toString().trim().isEmpty()) {
+            more2.error = "Required!"
+            return false
+        }
         return true
     }
 
@@ -284,6 +413,11 @@ class SupportActivity : AppCompatActivity() {
             placeImage.setImageURI(imageUri)
             imageSelected2 = true
         }
+        if (resultCode == RESULT_OK && requestCode == 104) {
+            imageUri = data?.data
+            appointImage.setImageURI(imageUri)
+            imageSelected3 = true
+        }
     }
 
     //upload user's profile pic
@@ -291,7 +425,11 @@ class SupportActivity : AppCompatActivity() {
         imageView: ShapeableImageView,
         toFolder: String,
         name: TextInputEditText,
-        number: TextInputEditText
+        title: TextInputEditText,
+        work: TextInputEditText,
+        address: TextInputEditText,
+        time: TextInputEditText,
+        date: TextInputEditText
     ) {
         imageView.setDrawingCacheEnabled(true)
         imageView.buildDrawingCache()
@@ -317,14 +455,27 @@ class SupportActivity : AppCompatActivity() {
                 saveData(
                     toFolder,
                     name.text.toString(),
-                    number.text.toString(),
-                    imageUrl
+                    title.text.toString(),
+                    imageUrl,
+                    address.text.toString(),
+                    work.text.toString(),
+                    time.text.toString(),
+                    date.text.toString()
                 )
             }
         }
     }
 
-    private fun saveData(to: String, name: String, number: String, imageUrl: String) {
+    private fun saveData(
+        to: String,
+        name: String,
+        number: String,
+        imageUrl: String,
+        address: String,
+        work: String,
+        time: String,
+        date: String
+    ) {
 
         val user: FirebaseUser? = mAuth.currentUser
         val reference: DocumentReference =
@@ -367,6 +518,23 @@ class SupportActivity : AppCompatActivity() {
 //            imageUrl is TIME
             val userData = RoutineModel(name, number, imageUrl, "no")
             if (user != null) {
+                reference.set(userData).addOnSuccessListener {
+                    Toast.makeText(this, "$name added", Toast.LENGTH_SHORT).show()
+                    finish()
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Error occurred!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+            }
+        }
+        //adding data to firebase fire-store
+        if (to == "appointments") {
+            val userData = AppointmentModel(imageUrl, name, number, work, address, time, date)
+            if (user != null) {
+                val reference: DocumentReference =
+                    mFirestore.collection("$to${user.uid}").document()
+
                 reference.set(userData).addOnSuccessListener {
                     Toast.makeText(this, "$name added", Toast.LENGTH_SHORT).show()
                     finish()
