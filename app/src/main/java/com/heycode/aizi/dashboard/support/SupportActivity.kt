@@ -112,6 +112,7 @@ class SupportActivity : AppCompatActivity() {
                     layoutOne.visibility = View.VISIBLE
                     layoutTwo.visibility = View.GONE
                     layoutThree.visibility = View.GONE
+                    layoutFour.visibility = View.GONE
                     findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
 
                     personImage = findViewById(R.id.support_person_image)
@@ -154,6 +155,7 @@ class SupportActivity : AppCompatActivity() {
                     layoutOne.visibility = View.GONE
                     layoutTwo.visibility = View.VISIBLE
                     layoutThree.visibility = View.GONE
+                    layoutFour.visibility = View.GONE
                     findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
 
                     placeImage = findViewById(R.id.support_place_image)
@@ -193,10 +195,11 @@ class SupportActivity : AppCompatActivity() {
                 ////////////////Third UI
                 2 -> {
                     supportActionBar?.title = "Add Daily Activity"
+                    findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
                     layoutOne.visibility = View.GONE
                     layoutTwo.visibility = View.GONE
                     layoutThree.visibility = View.VISIBLE
-                    findViewById<LinearLayout>(R.id.zero_layout).visibility = View.GONE
+                    layoutFour.visibility = View.GONE
 
                     routineName = findViewById(R.id.support_daily_title)
                     routineDate = findViewById(R.id.support_daily_date)
