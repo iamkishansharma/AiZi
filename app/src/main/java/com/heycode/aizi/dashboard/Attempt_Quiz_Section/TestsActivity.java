@@ -52,9 +52,11 @@ public class TestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tests);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+        toolbar.setTitle("Available Tests");
         setSupportActionBar(toolbar);
+
         avLoadingIndicatorView = findViewById(R.id.loader1);
         avLoadingIndicatorView.setVisibility(View.VISIBLE);
         avLoadingIndicatorView.show();
@@ -140,7 +142,7 @@ public class TestsActivity extends AppCompatActivity {
                 listItem = LayoutInflater.from(mContext).inflate(R.layout.test_item, parent, false);
 
             ((ImageView) listItem.findViewById(R.id.item_imageView)).
-                    setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_account_box));
+                    setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_list));
 
             ((TextView) listItem.findViewById(R.id.item_textView))
                     .setText(dataList.get(position).getName() + " : " + dataList.get(position).getTime() + "Min");
@@ -166,6 +168,4 @@ public class TestsActivity extends AppCompatActivity {
             return listItem;
         }
     }
-
-
 }

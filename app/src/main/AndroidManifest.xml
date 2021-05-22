@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -17,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AiZi"
         android:usesCleartextTraffic="true">
-        <activity android:name=".dashboard.training.Quizcat"></activity>
+        <activity android:name=".dashboard.result.ResultActivity" />
+        <activity android:name=".dashboard.training.Quizcat" />
 
         <receiver
             android:name=".dailyroutine.AlarmReceiver"
@@ -50,9 +54,6 @@
             android:name=".dashboard.Attempt_Quiz_Section.Create_Test.CreateTestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
-
-
-
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait"

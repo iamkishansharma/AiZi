@@ -368,13 +368,18 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/addTest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_edit" />
             </LinearLayout>
 
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/addTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fourth_group"
+                android:layout_centerInParent="true"
+                android:layout_margin="20dp"
+                android:src="@drawable/ic_edit"
+                android:text="@string/create_a_test_btn"
+                android:visibility="gone" />
         </RelativeLayout>
     </ScrollView>
 

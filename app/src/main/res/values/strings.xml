@@ -14,12 +14,11 @@
     <string name="dashboard">Dashboard</string>
     <string name="daily_routine">Daily Routine</string>
     <string name="profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="download">Download</string>
-    <string name="quiz1">Quiz1</string>
+    <string name="quiz1">Quiz Name</string>
     <string name="attempt">Attempt</string>
+    <string name="create_a_test_btn">You can create a test\nTap here</string>
 
     <string-array name="supportOption">
         <item>Add person to remember</item>

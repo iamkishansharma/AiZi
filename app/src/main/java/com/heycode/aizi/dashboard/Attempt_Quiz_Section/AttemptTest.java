@@ -3,7 +3,6 @@ package com.heycode.aizi.dashboard.Attempt_Quiz_Section;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -83,7 +82,8 @@ public class AttemptTest extends AppCompatActivity {
         timer = CommanClass.time * 60 * 1000;
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+
         answers = new String[questions.size()];
         setSupportActionBar(toolbar);
         setTitle(TESTNAME);
@@ -129,12 +129,7 @@ public class AttemptTest extends AppCompatActivity {
                 slideUp(indexLayout);
             }
         });
-        scrollView.addScrollListener(new DiscreteScrollView.ScrollListener<RecyclerView.ViewHolder>() {
-            @Override
-            public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
-                setNextPrevButton(newPosition);
-            }
-        });
+        scrollView.addScrollListener((scrollPosition, currentPosition, newPosition, currentHolder, newCurrent) -> setNextPrevButton(newPosition));
 
 
     }
@@ -142,21 +137,13 @@ public class AttemptTest extends AppCompatActivity {
     void showPopUp() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AttemptTest.this);
         builder.setMessage("Do you want to submit?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                submit();
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+            submit();
 //                setAlertDialog(answerText);
-                dialogStart();
-            }
+            dialogStart();
         });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
         builder.show();
 
     }
@@ -206,32 +193,23 @@ public class AttemptTest extends AppCompatActivity {
         }
 
         builderSingle.setCancelable(false);
-        builderSingle.setNegativeButton("Done!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-                dialog.dismiss();
-            }
+        builderSingle.setNegativeButton("Done!", (dialog, which) -> {
+            finish();
+            dialog.dismiss();
         });
 
-        builderSingle.setAdapter(arrayAdapter1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String strName = arrayAdapter.getItem(which);
-                AlertDialog.Builder builderInner = new AlertDialog.Builder(AttemptTest.this);
-                builderInner.setMessage(strName);
-                builderInner.setCancelable(false);
-                builderInner.setTitle("Your Selected Question Answer is");
-                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        builderSingle.setAdapter(arrayAdapter1, (dialog, which) -> {
+            String strName = arrayAdapter.getItem(which);
+            AlertDialog.Builder builderInner = new AlertDialog.Builder(AttemptTest.this);
+            builderInner.setMessage(strName);
+            builderInner.setCancelable(false);
+            builderInner.setTitle("Your Selected Question Answer is");
+            builderInner.setPositiveButton("Ok", (dialog1, which1) -> {
 //                        finish();
-                        builderSingle.show();
+                builderSingle.show();
 //                        dialog.dismiss();
-                    }
-                });
-                builderInner.show();
-            }
+            });
+            builderInner.show();
         });
         builderSingle.show();
 
