@@ -15,6 +15,7 @@ import com.heycode.aizi.dashboard.Attempt_Quiz_Section.TestsActivity
 import com.heycode.aizi.dashboard.appointment.AppointmentActivity
 import com.heycode.aizi.dashboard.identify.IdentifyActivity
 import com.heycode.aizi.dashboard.locations.LocationActivity
+import com.heycode.aizi.dashboard.medicine.MedicineActivity
 import com.heycode.aizi.dashboard.result.ResultActivity
 import com.heycode.aizi.dashboard.support.SupportActivity
 import com.heycode.aizi.dashboard.todo.TodoActivity
@@ -34,35 +35,46 @@ class DashbaordFragment : Fragment() {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_dashbaord, container, false)
 
+        //IdentifyPeople :: 1st Card
         rootView.findViewById<CardView>(R.id.card_identify).setOnClickListener {
             startActivity(Intent(activity, IdentifyActivity::class.java))
         }
+
+        //ImportantLocations :: 2nd Card
         rootView.findViewById<CardView>(R.id.card_location).setOnClickListener {
             startActivity(Intent(activity, LocationActivity::class.java))
         }
+
+        //ToDos :: 3rd Card
         rootView.findViewById<CardView>(R.id.card_todo).setOnClickListener {
             startActivity(Intent(activity, TodoActivity::class.java))
         }
-        //Attempt Test :: 5th Card
+
+        //AttemptTest :: 4th Card
         rootView.findViewById<CardView>(R.id.card_training).setOnClickListener {
             startActivity(Intent(activity, TestsActivity::class.java))
         }
+        //Medicines :: 5th Card
+        rootView.findViewById<CardView>(R.id.card_medicine).setOnClickListener {
+            startActivity(Intent(activity, MedicineActivity::class.java))
+        }
 
-        //Appointment view :: 6th Card
+        //AppointmentView :: 6th Card
         rootView.findViewById<CardView>(R.id.card_appointment).setOnClickListener {
             startActivity(Intent(activity, AppointmentActivity::class.java))
         }
 
-        //Result Analysis :: 7th Card
+        //ResultAnalysis :: 7th Card
         rootView.findViewById<CardView>(R.id.card_result).setOnClickListener {
             startActivity(Intent(activity, ResultActivity::class.java))
         }
 
-        //Support and Add data :: 8th Card
+        //SupportAndAddData :: 8th Card
         rootView.findViewById<CardView>(R.id.card_support).setOnClickListener {
             startActivity(Intent(activity, SupportActivity::class.java))
         }
 
+        //making only one admin
         if (user?.email.equals("skishan781@gmail.com")) {
             rootView.findViewById<ExtendedFloatingActionButton>(R.id.addTest).visibility =
                 View.VISIBLE

@@ -3,13 +3,10 @@
     package="com.heycode.aizi">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -20,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AiZi"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".dashboard.medicine.MedicineActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".dashboard.result.ResultActivity" />
         <activity android:name=".dashboard.training.Quizcat" />
 
@@ -27,13 +27,27 @@
             android:name=".dailyroutine.AlarmReceiver"
             android:enabled="true" />
 
-        <activity android:name=".dashboard.support.SupportActivity" />
-        <activity android:name=".dashboard.appointment.AppointmentActivity" />
-        <activity android:name=".dashboard.todo.AddTaskActivity" />
-        <activity android:name=".dashboard.training.TrainingActivity" />
-        <activity android:name=".dashboard.todo.TodoActivity" />
-        <activity android:name=".dashboard.locations.LocationActivity" />
-        <activity android:name=".dashboard.identify.IdentifyActivity" />
+        <activity
+            android:name=".dashboard.support.SupportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.appointment.AppointmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.todo.AddTaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.training.TrainingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.todo.TodoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.locations.LocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.identify.IdentifyActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignupActivity"
             android:screenOrientation="portrait"
@@ -68,7 +82,9 @@
             android:name=".SigninActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

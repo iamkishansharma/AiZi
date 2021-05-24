@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
+    android:backgroundTint="@color/teal_700"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:id="@+id/medicine_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/medicine" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medicine_image">
+
+            <ImageButton
+                android:id="@+id/medicine_clock_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button"
+                android:src="@drawable/ic_alarm" />
+
+            <TextView
+                android:id="@+id/medicine_time"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/medicine_clock_image"
+                android:padding="5dp"
+                android:src="@drawable/ic_alarm"
+                android:text="20:52"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/medicine_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/medicine_clock_image"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/medicine_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medicine_title"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="50dp"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
