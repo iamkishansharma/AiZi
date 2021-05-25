@@ -6,16 +6,13 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize">
 
-
     <ListView
         android:id="@+id/test_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        tools:listitem="@layout/test_item">
-
-    </ListView>
+        tools:listitem="@layout/test_item" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
