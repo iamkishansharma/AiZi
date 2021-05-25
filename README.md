@@ -33,11 +33,22 @@
     <th>Add People to Identify</th>
     <th>Add Important Locations</th>
     <th>Add Daily routine</th>
+    <th>Result</th>
   </tr>
   <tr>
     <td><img alt="support" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/SupportScreen.jpg" width="200px"/></td>
     <td><img alt="addpeople" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/AddPeople.jpg" width="200px"/></td>
     <td><img alt="addplace" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/AddPlace.jpg" width="200px"/></td>
     <td><img alt="addroutine" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/AddDailyRoutine.jpg" width="200px"/></td>
+    <td><img alt="resultin" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/ResultIn.jpg" width="200px"/></td>
+    </tr>
+  
+  <tr>
+    <th>Medicine Screen</th>
+    <th>Attempt Test</th>
+  </tr>
+  <tr>
+    <td><img alt="medicine" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/Medicine.jpg" width="200px"/></td>
+    <td><img alt="attempttest" src="https://raw.githubusercontent.com/iamkishansharma/my-project-screenshots/main/AiZi/Test.jpg" width="200px"/></td>
     </tr>
 </table>
