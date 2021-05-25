@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/purple">
 
 
     <ScrollView
@@ -20,26 +21,26 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView3"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dip"
-                    android:text="QUESTION"
-                    android:textSize="30sp" />
+                    android:layout_margin="20dp"
+                    android:text="QUESTION" />
 
                 <TextView
                     android:id="@+id/questionNumber"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="156dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="291dp"
-                    android:text="1"
-                    android:textSize="30sp" />
+                    android:layout_marginTop="20dp"
+                    android:text="1" />
 
             </LinearLayout>
 
