@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -87,32 +86,26 @@ public class AttemptTest extends AppCompatActivity {
         answers = new String[questions.size()];
         setSupportActionBar(toolbar);
         setTitle(TESTNAME);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         scrollView = findViewById(R.id.discrete);
         final QuestionAdapter questionAdapter = new QuestionAdapter(questions);
         scrollView.setAdapter(questionAdapter);
 
         next = findViewById(R.id.next);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (scrollView.getCurrentItem() == questions.size() - 1) {
-                    showPopUp();
-                } else {
-                    //setNextPrevButton(scrollView.getCurrentItem() + 1);
-                    scrollView.smoothScrollToPosition(scrollView.getCurrentItem() + 1);
-                }
+        next.setOnClickListener(view -> {
+            if (scrollView.getCurrentItem() == questions.size() - 1) {
+                showPopUp();
+            } else {
+                //setNextPrevButton(scrollView.getCurrentItem() + 1);
+                scrollView.smoothScrollToPosition(scrollView.getCurrentItem() + 1);
             }
         });
 
         prev = findViewById(R.id.prev);
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (scrollView.getCurrentItem() != 0) {
-                    //setNextPrevButton(scrollView.getCurrentItem()-1);
-                    scrollView.smoothScrollToPosition(scrollView.getCurrentItem() - 1);
-                }
+        prev.setOnClickListener(view -> {
+            if (scrollView.getCurrentItem() != 0) {
+                //setNextPrevButton(scrollView.getCurrentItem()-1);
+                scrollView.smoothScrollToPosition(scrollView.getCurrentItem() - 1);
             }
         });
 
@@ -122,12 +115,9 @@ public class AttemptTest extends AppCompatActivity {
         quesGrid = findViewById(R.id.pop_grid);
         popGrid = new popGridAdapter(AttemptTest.this);
         quesGrid.setAdapter(popGrid);
-        quesGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                scrollView.smoothScrollToPosition(i + 1);
-                slideUp(indexLayout);
-            }
+        quesGrid.setOnItemClickListener((adapterView, view, i, l) -> {
+            scrollView.smoothScrollToPosition(i + 1);
+            slideUp(indexLayout);
         });
         scrollView.addScrollListener((scrollPosition, currentPosition, newPosition, currentHolder, newCurrent) -> setNextPrevButton(newPosition));
 
